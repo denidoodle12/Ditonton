@@ -3,6 +3,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
+import 'package:ditonton/presentation/pages/tv_season_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
@@ -70,17 +71,13 @@ class TvDetailContent extends StatefulWidget {
 }
 
 class _TvDetailContentState extends State<TvDetailContent> {
-  // Track which seasons are expanded
-  final Map<int, bool> _expandedSeasons = {};
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl:
-              'https://image.tmdb.org/t/p/w500${widget.tv.posterPath}',
+          imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tv.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => Center(
             child: CircularProgressIndicator(),
@@ -94,8 +91,7 @@ class _TvDetailContentState extends State<TvDetailContent> {
               return Container(
                 decoration: BoxDecoration(
                   color: kRichBlack,
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(16)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 padding: const EdgeInsets.only(
                   left: 16,
@@ -118,21 +114,19 @@ class _TvDetailContentState extends State<TvDetailContent> {
                             FilledButton(
                               onPressed: () async {
                                 if (!widget.isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(
-                                          context,
+                                  await Provider.of<TvDetailNotifier>(context,
                                           listen: false)
                                       .addWatchlist(widget.tv);
                                 } else {
-                                  await Provider.of<TvDetailNotifier>(
-                                          context,
+                                  await Provider.of<TvDetailNotifier>(context,
                                           listen: false)
                                       .removeFromWatchlist(widget.tv);
                                 }
 
-                                final message =
-                                    Provider.of<TvDetailNotifier>(context,
-                                            listen: false)
-                                        .watchlistMessage;
+                                final message = Provider.of<TvDetailNotifier>(
+                                        context,
+                                        listen: false)
+                                    .watchlistMessage;
 
                                 if (message ==
                                         TvDetailNotifier
@@ -199,9 +193,6 @@ class _TvDetailContentState extends State<TvDetailContent> {
                               ),
                               SizedBox(height: 8),
                               ...widget.tv.seasons.map((season) {
-                                final isExpanded =
-                                    _expandedSeasons[season.seasonNumber] ??
-                                        false;
                                 return Card(
                                   child: Column(
                                     children: [
@@ -214,51 +205,41 @@ class _TvDetailContentState extends State<TvDetailContent> {
                                                   imageUrl:
                                                       'https://image.tmdb.org/t/p/w92${season.posterPath}',
                                                   width: 40,
-                                                  placeholder:
-                                                      (context, url) =>
-                                                          SizedBox(
+                                                  placeholder: (context, url) =>
+                                                      SizedBox(
                                                     width: 40,
                                                     child: Center(
                                                       child:
                                                           CircularProgressIndicator(),
                                                     ),
                                                   ),
-                                                  errorWidget: (context,
-                                                          url, error) =>
-                                                      Icon(Icons.image),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Icon(Icons.image),
                                                 ),
                                               )
                                             : Icon(Icons.image),
                                         title: Text(season.name),
                                         subtitle: Text(
                                             '${season.episodeCount} Episodes'),
-                                        trailing: Icon(
-                                          isExpanded
-                                              ? Icons.expand_less
-                                              : Icons.expand_more,
-                                        ),
+                                        trailing: Icon(Icons.arrow_forward_ios,
+                                            size: 16),
                                         onTap: () {
-                                          setState(() {
-                                            _expandedSeasons[
-                                                    season.seasonNumber] =
-                                                !isExpanded;
-                                          });
+                                          Navigator.pushNamed(
+                                            context,
+                                            TvSeasonDetailPage.ROUTE_NAME,
+                                            arguments: {
+                                              'tvId': widget.tv.id,
+                                              'seasonNumber':
+                                                  season.seasonNumber,
+                                            },
+                                          );
                                         },
                                       ),
-                                      if (isExpanded &&
-                                          season.overview.isNotEmpty)
-                                        Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Text(
-                                            season.overview,
-                                            style: TextStyle(
-                                                color: Colors.white70),
-                                          ),
-                                        ),
                                     ],
                                   ),
                                 );
-                              }),
+                              }).toList(),
                               SizedBox(height: 16),
                             ],
                             Text(
@@ -288,8 +269,7 @@ class _TvDetailContentState extends State<TvDetailContent> {
                                           padding: const EdgeInsets.all(4.0),
                                           child: InkWell(
                                             onTap: () {
-                                              Navigator
-                                                  .pushReplacementNamed(
+                                              Navigator.pushReplacementNamed(
                                                 context,
                                                 TvDetailPage.ROUTE_NAME,
                                                 arguments: tv.id,
@@ -302,22 +282,20 @@ class _TvDetailContentState extends State<TvDetailContent> {
                                               child: CachedNetworkImage(
                                                 imageUrl:
                                                     'https://image.tmdb.org/t/p/w500${tv.posterPath}',
-                                                placeholder:
-                                                    (context, url) =>
-                                                        Center(
+                                                placeholder: (context, url) =>
+                                                    Center(
                                                   child:
                                                       CircularProgressIndicator(),
                                                 ),
-                                                errorWidget: (context, url,
-                                                        error) =>
-                                                    Icon(Icons.error),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
                                               ),
                                             ),
                                           ),
                                         );
                                       },
-                                      itemCount:
-                                          widget.recommendations.length,
+                                      itemCount: widget.recommendations.length,
                                     ),
                                   );
                                 } else {
@@ -325,6 +303,7 @@ class _TvDetailContentState extends State<TvDetailContent> {
                                 }
                               },
                             ),
+                            SizedBox(height: 16),
                           ],
                         ),
                       ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
+import 'package:ditonton/data/models/season_detail_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -196,6 +197,35 @@ void main() {
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.searchTv(tQuery);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('get tv season detail', () {
+    final tId = 1;
+    final tSeasonNumber = 1;
+    final tSeasonDetail = SeasonDetailModel.fromJson(
+        json.decode(readJson('dummy_data/tv_season_detail.json')));
+
+    test('should return season detail when the response code is 200', () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId/season/$tSeasonNumber?$API_KEY')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/tv_season_detail.json'), 200));
+      // act
+      final result = await dataSource.getTvSeasonDetail(tId, tSeasonNumber);
+      // assert
+      expect(result, equals(tSeasonDetail));
+    });
+
+    test('should throw Server Exception when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId/season/$tSeasonNumber?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getTvSeasonDetail(tId, tSeasonNumber);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });

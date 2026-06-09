@@ -1,0 +1,26 @@
+{
+  "_id": "5256cefc19c2956ff60df8eb",
+  "air_date": "2013-04-06",
+  "episodes": [
+    {
+      "air_date": "2013-04-06",
+      "episode_number": 1,
+      "id": 62085,
+      "name": "To You, in 2000 Years: The Fall of Shiganshina, Part 1",
+      "overview": "For over a century, humans have faced destruction...",
+      "production_code": "1",
+      "runtime": 24,
+      "season_number": 1,
+      "show_id": 1429,
+      "still_path": "/xOQyA3b9rN53K1XlMhT4R9gI2L7.jpg",
+      "vote_average": 8.046,
+      "vote_count": 272
+    }
+  ],
+  "name": "Season 1",
+  "overview": "The first season of the Attack on Titan...",
+  "id": 3665,
+  "poster_path": "/3L1n3S5fW82qA0rY10E2d1f9s4H.jpg",
+  "season_number": 1,
+  "vote_average": 8.4
+}
