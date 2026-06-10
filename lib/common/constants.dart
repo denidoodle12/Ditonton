@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+const String BASE_IMAGE_URL_W92 = 'https://image.tmdb.org/t/p/w92';
 
 // colors
 const Color richBlack = Color(0xFF000814);

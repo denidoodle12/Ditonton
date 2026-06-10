@@ -46,6 +46,19 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
                 child: CircularProgressIndicator(),
               );
             } else if (data.watchlistState == RequestState.Loaded) {
+              if (data.watchlistTv.isEmpty) {
+                return Center(
+                  key: Key('empty_message'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.tv_off, size: 64, color: Colors.grey),
+                      SizedBox(height: 16),
+                      Text('No TV Series in Watchlist'),
+                    ],
+                  ),
+                );
+              }
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = data.watchlistTv[index];

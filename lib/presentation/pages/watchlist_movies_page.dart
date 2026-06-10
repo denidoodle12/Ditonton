@@ -48,6 +48,19 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                 child: CircularProgressIndicator(),
               );
             } else if (data.watchlistState == RequestState.Loaded) {
+              if (data.watchlistMovies.isEmpty) {
+                return Center(
+                  key: Key('empty_message'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.movie_filter_outlined, size: 64, color: Colors.grey),
+                      SizedBox(height: 16),
+                      Text('No Movies in Watchlist'),
+                    ],
+                  ),
+                );
+              }
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.watchlistMovies[index];
