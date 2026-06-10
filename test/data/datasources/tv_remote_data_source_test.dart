@@ -25,9 +25,9 @@ void main() {
   });
 
   group('get On The Air Tv', () {
-    final tTvList = TvResponse.fromJson(
-            json.decode(readJson('dummy_data/on_the_air.json')))
-        .tvList;
+    final tTvList =
+        TvResponse.fromJson(json.decode(readJson('dummy_data/on_the_air.json')))
+            .tvList;
 
     test('should return list of Tv Model when the response code is 200',
         () async {
@@ -55,9 +55,9 @@ void main() {
   });
 
   group('get Popular Tv', () {
-    final tTvList = TvResponse.fromJson(
-            json.decode(readJson('dummy_data/on_the_air.json')))
-        .tvList;
+    final tTvList =
+        TvResponse.fromJson(json.decode(readJson('dummy_data/on_the_air.json')))
+            .tvList;
 
     test('should return list of tv when response is success (200)', () async {
       // arrange
@@ -84,9 +84,9 @@ void main() {
   });
 
   group('get Top Rated Tv', () {
-    final tTvList = TvResponse.fromJson(
-            json.decode(readJson('dummy_data/on_the_air.json')))
-        .tvList;
+    final tTvList =
+        TvResponse.fromJson(json.decode(readJson('dummy_data/on_the_air.json')))
+            .tvList;
 
     test('should return list of tv when response code is 200', () async {
       // arrange
@@ -140,9 +140,9 @@ void main() {
   });
 
   group('get tv recommendations', () {
-    final tTvList = TvResponse.fromJson(
-            json.decode(readJson('dummy_data/on_the_air.json')))
-        .tvList;
+    final tTvList =
+        TvResponse.fromJson(json.decode(readJson('dummy_data/on_the_air.json')))
+            .tvList;
     final tId = 1;
 
     test('should return list of Tv Model when the response code is 200',
@@ -172,9 +172,9 @@ void main() {
   });
 
   group('search tv', () {
-    final tSearchResult = TvResponse.fromJson(
-            json.decode(readJson('dummy_data/on_the_air.json')))
-        .tvList;
+    final tSearchResult =
+        TvResponse.fromJson(json.decode(readJson('dummy_data/on_the_air.json')))
+            .tvList;
     final tQuery = 'Squid Game';
 
     test('should return list of tv when response code is 200', () async {
@@ -210,7 +210,8 @@ void main() {
 
     test('should return season detail when the response code is 200', () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId/season/$tSeasonNumber?$API_KEY')))
+      when(mockHttpClient.get(
+              Uri.parse('$BASE_URL/tv/$tId/season/$tSeasonNumber?$API_KEY')))
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/tv_season_detail.json'), 200));
       // act
@@ -222,7 +223,8 @@ void main() {
     test('should throw Server Exception when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId/season/$tSeasonNumber?$API_KEY')))
+      when(mockHttpClient.get(
+              Uri.parse('$BASE_URL/tv/$tId/season/$tSeasonNumber?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getTvSeasonDetail(tId, tSeasonNumber);

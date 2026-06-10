@@ -29,8 +29,7 @@ void main() {
 
   test('should change tv data when data is gotten successfully', () async {
     // arrange
-    when(mockGetWatchlistTv.execute())
-        .thenAnswer((_) async => Right(tTvList));
+    when(mockGetWatchlistTv.execute()).thenAnswer((_) async => Right(tTvList));
     // act
     await provider.fetchWatchlistTv();
     // assert

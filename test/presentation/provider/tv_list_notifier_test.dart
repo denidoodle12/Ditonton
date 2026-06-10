@@ -56,8 +56,7 @@ void main() {
 
     test('should get data from the usecase', () async {
       // arrange
-      when(mockGetOnTheAirTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetOnTheAirTv.execute()).thenAnswer((_) async => Right(tTvList));
       // act
       provider.fetchOnTheAirTv();
       // assert
@@ -66,8 +65,7 @@ void main() {
 
     test('should change state to Loading when usecase is called', () {
       // arrange
-      when(mockGetOnTheAirTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetOnTheAirTv.execute()).thenAnswer((_) async => Right(tTvList));
       // act
       provider.fetchOnTheAirTv();
       // assert
@@ -76,8 +74,7 @@ void main() {
 
     test('should change tv when data is gotten successfully', () async {
       // arrange
-      when(mockGetOnTheAirTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetOnTheAirTv.execute()).thenAnswer((_) async => Right(tTvList));
       // act
       await provider.fetchOnTheAirTv();
       // assert
@@ -102,8 +99,7 @@ void main() {
   group('popular tv', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockGetPopularTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
       // act
       provider.fetchPopularTv();
       // assert
@@ -112,8 +108,7 @@ void main() {
 
     test('should change tv data when data is gotten successfully', () async {
       // arrange
-      when(mockGetPopularTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
       // act
       await provider.fetchPopularTv();
       // assert
@@ -138,8 +133,7 @@ void main() {
   group('top rated tv', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockGetTopRatedTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
       // act
       provider.fetchTopRatedTv();
       // assert
@@ -148,8 +142,7 @@ void main() {
 
     test('should change tv data when data is gotten successfully', () async {
       // arrange
-      when(mockGetTopRatedTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
       // act
       await provider.fetchTopRatedTv();
       // assert

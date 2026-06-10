@@ -1,6 +1,5 @@
 import 'package:ditonton/domain/entities/episode.dart';
 import 'package:equatable/equatable.dart';
-
 class EpisodeModel extends Equatable {
   final int id;
   final String name;
@@ -10,7 +9,6 @@ class EpisodeModel extends Equatable {
   final int episodeNumber;
   final int seasonNumber;
   final double voteAverage;
-
   EpisodeModel({
     required this.id,
     required this.name,
@@ -21,7 +19,6 @@ class EpisodeModel extends Equatable {
     required this.seasonNumber,
     required this.voteAverage,
   });
-
   factory EpisodeModel.fromJson(Map<String, dynamic> json) => EpisodeModel(
         id: json['id'],
         name: json['name'],
@@ -32,7 +29,6 @@ class EpisodeModel extends Equatable {
         seasonNumber: json['season_number'],
         voteAverage: json['vote_average'].toDouble(),
       );
-
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
@@ -43,7 +39,6 @@ class EpisodeModel extends Equatable {
         'season_number': seasonNumber,
         'vote_average': voteAverage,
       };
-
   Episode toEntity() {
     return Episode(
       id: this.id,
@@ -56,7 +51,6 @@ class EpisodeModel extends Equatable {
       voteAverage: this.voteAverage,
     );
   }
-
   @override
   List<Object?> get props => [
         id,

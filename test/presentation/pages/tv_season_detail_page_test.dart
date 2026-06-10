@@ -36,8 +36,8 @@ void main() {
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(
-        TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
+    await tester.pumpWidget(
+        _makeTestableWidget(TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
 
     expect(centerFinder, findsWidgets);
     expect(progressBarFinder, findsOneWidget);
@@ -62,8 +62,8 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(
-        TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
+    await tester.pumpWidget(
+        _makeTestableWidget(TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
 
     expect(listViewFinder, findsOneWidget);
     expect(find.text('1. Episode 1'), findsOneWidget);
@@ -77,8 +77,8 @@ void main() {
 
     final textFinder = find.text('Error message');
 
-    await tester.pumpWidget(_makeTestableWidget(
-        TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
+    await tester.pumpWidget(
+        _makeTestableWidget(TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
 
     expect(textFinder, findsOneWidget);
   });

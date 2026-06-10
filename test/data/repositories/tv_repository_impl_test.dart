@@ -119,8 +119,8 @@ void main() {
       // act
       final result = await repository.getPopularTv();
       // assert
-      expect(result,
-          Left(ConnectionFailure('Failed to connect to the network')));
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 
@@ -156,8 +156,8 @@ void main() {
       // act
       final result = await repository.getTopRatedTv();
       // assert
-      expect(result,
-          Left(ConnectionFailure('Failed to connect to the network')));
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 
@@ -281,8 +281,8 @@ void main() {
       // act
       final result = await repository.searchTv(tQuery);
       // assert
-      expect(result,
-          Left(ConnectionFailure('Failed to connect to the network')));
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 
@@ -418,10 +418,8 @@ void main() {
       final result = await repository.getTvSeasonDetail(tId, tSeasonNumber);
       // assert
       verify(mockRemoteDataSource.getTvSeasonDetail(tId, tSeasonNumber));
-      expect(
-          result,
-          equals(Left(
-              ConnectionFailure('Failed to connect to the network'))));
+      expect(result,
+          equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
   });
 }

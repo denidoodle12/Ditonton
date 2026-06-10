@@ -59,7 +59,8 @@ class EpisodeCard extends StatelessWidget {
                     )
                   : Container(
                       width: 80,
-                      height: 120, // To match standard card image height approximately
+                      height:
+                          120, // To match standard card image height approximately
                       color: Colors.grey[800],
                       child: Icon(Icons.image),
                     ),
