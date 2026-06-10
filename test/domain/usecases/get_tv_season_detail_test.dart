@@ -7,12 +7,12 @@ import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTvSeasonDetail usecase;
-  late MockTvRepository mockTvRepository;
+  late GetTVSeasonDetail usecase;
+  late MockTVRepository mockTVRepository;
 
   setUp(() {
-    mockTvRepository = MockTvRepository();
-    usecase = GetTvSeasonDetail(mockTvRepository);
+    mockTVRepository = MockTVRepository();
+    usecase = GetTVSeasonDetail(mockTVRepository);
   });
 
   final tTvId = 1;
@@ -21,7 +21,7 @@ void main() {
 
   test('should get list of episodes from the repository', () async {
     // arrange
-    when(mockTvRepository.getTvSeasonDetail(tTvId, tSeasonNumber))
+    when(mockTVRepository.getTvSeasonDetail(tTvId, tSeasonNumber))
         .thenAnswer((_) async => Right(tEpisodes));
     // act
     final result = await usecase.execute(tTvId, tSeasonNumber);

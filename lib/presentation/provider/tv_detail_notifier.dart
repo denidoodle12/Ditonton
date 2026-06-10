@@ -9,32 +9,32 @@ import 'package:ditonton/domain/usecases/save_watchlist_tv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class TvDetailNotifier extends ChangeNotifier {
+class TVDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  final GetTvDetail getTvDetail;
-  final GetTvRecommendations getTvRecommendations;
-  final GetWatchListStatusTv getWatchListStatusTv;
-  final SaveWatchlistTv saveWatchlistTv;
-  final RemoveWatchlistTv removeWatchlistTv;
+  final GetTVDetail getTVDetail;
+  final GetTVRecommendations getTvRecommendations;
+  final GetWatchListStatusTV getWatchListStatusTv;
+  final SaveWatchlistTV saveWatchlistTv;
+  final RemoveWatchlistTV removeWatchlistTv;
 
-  TvDetailNotifier({
-    required this.getTvDetail,
+  TVDetailNotifier({
+    required this.getTVDetail,
     required this.getTvRecommendations,
     required this.getWatchListStatusTv,
     required this.saveWatchlistTv,
     required this.removeWatchlistTv,
   });
 
-  late TvDetail _tv;
-  TvDetail get tv => _tv;
+  late TVDetail _tv;
+  TVDetail get tv => _tv;
 
   RequestState _tvState = RequestState.Empty;
   RequestState get tvState => _tvState;
 
-  List<Tv> _tvRecommendations = [];
-  List<Tv> get tvRecommendations => _tvRecommendations;
+  List<TV> _tvRecommendations = [];
+  List<TV> get tvRecommendations => _tvRecommendations;
 
   RequestState _recommendationState = RequestState.Empty;
   RequestState get recommendationState => _recommendationState;
@@ -45,10 +45,10 @@ class TvDetailNotifier extends ChangeNotifier {
   bool _isAddedtoWatchlist = false;
   bool get isAddedToWatchlist => _isAddedtoWatchlist;
 
-  Future<void> fetchTvDetail(int id) async {
+  Future<void> fetchTVDetail(int id) async {
     _tvState = RequestState.Loading;
     notifyListeners();
-    final detailResult = await getTvDetail.execute(id);
+    final detailResult = await getTVDetail.execute(id);
     final recommendationResult = await getTvRecommendations.execute(id);
     detailResult.fold(
       (failure) {
@@ -79,7 +79,7 @@ class TvDetailNotifier extends ChangeNotifier {
   String _watchlistMessage = '';
   String get watchlistMessage => _watchlistMessage;
 
-  Future<void> addWatchlist(TvDetail tv) async {
+  Future<void> addWatchlist(TVDetail tv) async {
     final result = await saveWatchlistTv.execute(tv);
 
     await result.fold(
@@ -94,7 +94,7 @@ class TvDetailNotifier extends ChangeNotifier {
     await loadWatchlistStatus(tv.id);
   }
 
-  Future<void> removeFromWatchlist(TvDetail tv) async {
+  Future<void> removeFromWatchlist(TVDetail tv) async {
     final result = await removeWatchlistTv.execute(tv);
 
     await result.fold(

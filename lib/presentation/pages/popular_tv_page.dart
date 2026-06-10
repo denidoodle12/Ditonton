@@ -4,19 +4,19 @@ import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PopularTvPage extends StatefulWidget {
+class PopularTVPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-tv';
 
   @override
-  _PopularTvPageState createState() => _PopularTvPageState();
+  _PopularTVPageState createState() => _PopularTVPageState();
 }
 
-class _PopularTvPageState extends State<PopularTvPage> {
+class _PopularTVPageState extends State<PopularTVPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<PopularTvNotifier>(context, listen: false)
+        Provider.of<PopularTVNotifier>(context, listen: false)
             .fetchPopularTv());
   }
 
@@ -28,7 +28,7 @@ class _PopularTvPageState extends State<PopularTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvNotifier>(
+        child: Consumer<PopularTVNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return Center(
@@ -38,7 +38,7 @@ class _PopularTvPageState extends State<PopularTvPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = data.tv[index];
-                  return TvCard(tv);
+                  return TVCard(tv);
                 },
                 itemCount: data.tv.length,
               );

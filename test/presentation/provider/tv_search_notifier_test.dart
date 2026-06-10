@@ -10,22 +10,22 @@ import 'package:mockito/mockito.dart';
 
 import 'tv_search_notifier_test.mocks.dart';
 
-@GenerateMocks([SearchTv])
+@GenerateMocks([SearchTV])
 void main() {
-  late TvSearchNotifier provider;
-  late MockSearchTv mockSearchTv;
+  late TVSearchNotifier provider;
+  late MockSearchTV mockSearchTV;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
-    mockSearchTv = MockSearchTv();
-    provider = TvSearchNotifier(searchTv: mockSearchTv)
+    mockSearchTV = MockSearchTV();
+    provider = TVSearchNotifier(searchTv: mockSearchTV)
       ..addListener(() {
         listenerCallCount += 1;
       });
   });
 
-  final tTvModel = Tv(
+  final tTVModel = TV(
     backdropPath: '/path.jpg',
     genreIds: [1, 2, 3],
     id: 1,
@@ -38,14 +38,14 @@ void main() {
     voteAverage: 1,
     voteCount: 1,
   );
-  final tTvList = <Tv>[tTvModel];
+  final tTVList = <TV>[tTVModel];
   final tQuery = 'squid game';
 
   group('search tv', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockSearchTv.execute(tQuery))
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockSearchTV.execute(tQuery))
+          .thenAnswer((_) async => Right(tTVList));
       // act
       provider.fetchTvSearch(tQuery);
       // assert
@@ -55,19 +55,19 @@ void main() {
     test('should change search result data when data is gotten successfully',
         () async {
       // arrange
-      when(mockSearchTv.execute(tQuery))
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockSearchTV.execute(tQuery))
+          .thenAnswer((_) async => Right(tTVList));
       // act
       await provider.fetchTvSearch(tQuery);
       // assert
       expect(provider.state, RequestState.Loaded);
-      expect(provider.searchResult, tTvList);
+      expect(provider.searchResult, tTVList);
       expect(listenerCallCount, 2);
     });
 
     test('should return error when data is unsuccessful', () async {
       // arrange
-      when(mockSearchTv.execute(tQuery))
+      when(mockSearchTV.execute(tQuery))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchTvSearch(tQuery);

@@ -8,7 +8,7 @@ import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 
-final testTv = Tv(
+final testTv = TV(
   backdropPath: '/path.jpg',
   genreIds: [1, 2, 3],
   id: 1,
@@ -22,9 +22,9 @@ final testTv = Tv(
   voteCount: 1,
 );
 
-final testTvList = [testTv];
+final testTVList = [testTv];
 
-final testTvDetail = TvDetail(
+final testTVDetail = TVDetail(
   backdropPath: '/path.jpg',
   genres: [Genre(id: 1, name: 'Action')],
   id: 1,
@@ -50,7 +50,7 @@ final testTvDetail = TvDetail(
   ],
 );
 
-final testTvDetailResponse = TvDetailResponse(
+final testTVDetailResponse = TVDetailResponse(
   backdropPath: '/path.jpg',
   genres: [GenreModel(id: 1, name: 'Action')],
   homepage: 'https://example.com',
@@ -83,14 +83,14 @@ final testTvDetailResponse = TvDetailResponse(
   voteCount: 1,
 );
 
-final testWatchlistTv = Tv.watchlist(
+final testWatchlistTv = TV.watchlist(
   id: 1,
   name: 'Name',
   posterPath: '/path.jpg',
   overview: 'Overview',
 );
 
-final testTvTable = TvTable(
+final testTVTable = TVTable(
   id: 1,
   name: 'Name',
   posterPath: '/path.jpg',
@@ -104,7 +104,7 @@ final testTvMap = {
   'overview': 'Overview',
 };
 
-final testTvModel = TvModel(
+final testTVModel = TVModel(
   backdropPath: '/path.jpg',
   genreIds: [1, 2, 3],
   id: 1,
@@ -118,4 +118,4 @@ final testTvModel = TvModel(
   voteCount: 1,
 );
 
-final testTvModelList = [testTvModel];
+final testTVModelList = [testTVModel];

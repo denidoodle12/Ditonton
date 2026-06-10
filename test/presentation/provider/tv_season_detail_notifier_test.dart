@@ -10,14 +10,14 @@ import 'package:mockito/mockito.dart';
 
 import 'tv_season_detail_notifier_test.mocks.dart';
 
-@GenerateMocks([GetTvSeasonDetail])
+@GenerateMocks([GetTVSeasonDetail])
 void main() {
-  late TvSeasonDetailNotifier provider;
-  late MockGetTvSeasonDetail mockGetTvSeasonDetail;
+  late TVSeasonDetailNotifier provider;
+  late MockGetTVSeasonDetail mockGetTVSeasonDetail;
 
   setUp(() {
-    mockGetTvSeasonDetail = MockGetTvSeasonDetail();
-    provider = TvSeasonDetailNotifier(getTvSeasonDetail: mockGetTvSeasonDetail);
+    mockGetTVSeasonDetail = MockGetTVSeasonDetail();
+    provider = TVSeasonDetailNotifier(getTvSeasonDetail: mockGetTVSeasonDetail);
   });
 
   final tTvId = 1;
@@ -34,10 +34,10 @@ void main() {
   );
   final tEpisodes = [tEpisode];
 
-  group('Get Tv Season Detail', () {
+  group('Get TV Season Detail', () {
     test('should change state to Loading when usecase is called', () async {
       // arrange
-      when(mockGetTvSeasonDetail.execute(tTvId, tSeasonNumber))
+      when(mockGetTVSeasonDetail.execute(tTvId, tSeasonNumber))
           .thenAnswer((_) async => Right(tEpisodes));
       // act
       provider.fetchTvSeasonDetail(tTvId, tSeasonNumber);
@@ -47,7 +47,7 @@ void main() {
 
     test('should change episodes when data is gotten successfully', () async {
       // arrange
-      when(mockGetTvSeasonDetail.execute(tTvId, tSeasonNumber))
+      when(mockGetTVSeasonDetail.execute(tTvId, tSeasonNumber))
           .thenAnswer((_) async => Right(tEpisodes));
       // act
       await provider.fetchTvSeasonDetail(tTvId, tSeasonNumber);
@@ -58,7 +58,7 @@ void main() {
 
     test('should return error when data is unsuccessful', () async {
       // arrange
-      when(mockGetTvSeasonDetail.execute(tTvId, tSeasonNumber))
+      when(mockGetTVSeasonDetail.execute(tTvId, tSeasonNumber))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchTvSeasonDetail(tTvId, tSeasonNumber);

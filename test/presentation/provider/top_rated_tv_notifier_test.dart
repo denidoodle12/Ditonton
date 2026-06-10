@@ -10,22 +10,22 @@ import 'package:mockito/mockito.dart';
 
 import 'top_rated_tv_notifier_test.mocks.dart';
 
-@GenerateMocks([GetTopRatedTv])
+@GenerateMocks([GetTopRatedTV])
 void main() {
-  late MockGetTopRatedTv mockGetTopRatedTv;
-  late TopRatedTvNotifier notifier;
+  late MockGetTopRatedTV mockGetTopRatedTV;
+  late TopRatedTVNotifier notifier;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
-    mockGetTopRatedTv = MockGetTopRatedTv();
-    notifier = TopRatedTvNotifier(getTopRatedTv: mockGetTopRatedTv)
+    mockGetTopRatedTV = MockGetTopRatedTV();
+    notifier = TopRatedTVNotifier(getTopRatedTv: mockGetTopRatedTV)
       ..addListener(() {
         listenerCallCount++;
       });
   });
 
-  final tTv = Tv(
+  final tTv = TV(
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
     id: 1,
@@ -38,11 +38,11 @@ void main() {
     voteAverage: 1,
     voteCount: 1,
   );
-  final tTvList = <Tv>[tTv];
+  final tTVList = <TV>[tTv];
 
   test('should change state to loading when usecase is called', () async {
     // arrange
-    when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
+    when(mockGetTopRatedTV.execute()).thenAnswer((_) async => Right(tTVList));
     // act
     notifier.fetchTopRatedTv();
     // assert
@@ -52,18 +52,18 @@ void main() {
 
   test('should change tv data when data is gotten successfully', () async {
     // arrange
-    when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
+    when(mockGetTopRatedTV.execute()).thenAnswer((_) async => Right(tTVList));
     // act
     await notifier.fetchTopRatedTv();
     // assert
     expect(notifier.state, RequestState.Loaded);
-    expect(notifier.tv, tTvList);
+    expect(notifier.tv, tTVList);
     expect(listenerCallCount, 2);
   });
 
   test('should return error when data is unsuccessful', () async {
     // arrange
-    when(mockGetTopRatedTv.execute())
+    when(mockGetTopRatedTV.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     // act
     await notifier.fetchTopRatedTv();

@@ -27,9 +27,9 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeGetTvSeasonDetail_0 extends _i1.SmartFake
-    implements _i2.GetTvSeasonDetail {
-  _FakeGetTvSeasonDetail_0(
+class _FakeGetTVSeasonDetail_0 extends _i1.SmartFake
+    implements _i2.GetTVSeasonDetail {
+  _FakeGetTVSeasonDetail_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -38,23 +38,23 @@ class _FakeGetTvSeasonDetail_0 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [TvSeasonDetailNotifier].
+/// A class which mocks [TVSeasonDetailNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvSeasonDetailNotifier extends _i1.Mock
-    implements _i3.TvSeasonDetailNotifier {
-  MockTvSeasonDetailNotifier() {
+class MockTVSeasonDetailNotifier extends _i1.Mock
+    implements _i3.TVSeasonDetailNotifier {
+  MockTVSeasonDetailNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetTvSeasonDetail get getTvSeasonDetail => (super.noSuchMethod(
+  _i2.GetTVSeasonDetail get getTvSeasonDetail => (super.noSuchMethod(
         Invocation.getter(#getTvSeasonDetail),
-        returnValue: _FakeGetTvSeasonDetail_0(
+        returnValue: _FakeGetTVSeasonDetail_0(
           this,
           Invocation.getter(#getTvSeasonDetail),
         ),
-      ) as _i2.GetTvSeasonDetail);
+      ) as _i2.GetTVSeasonDetail);
 
   @override
   _i4.RequestState get seasonState => (super.noSuchMethod(

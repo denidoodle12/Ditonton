@@ -26,8 +26,8 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeSearchTv_0 extends _i1.SmartFake implements _i2.SearchTv {
-  _FakeSearchTv_0(
+class _FakeSearchTV_0 extends _i1.SmartFake implements _i2.SearchTV {
+  _FakeSearchTV_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -36,22 +36,22 @@ class _FakeSearchTv_0 extends _i1.SmartFake implements _i2.SearchTv {
         );
 }
 
-/// A class which mocks [TvSearchNotifier].
+/// A class which mocks [TVSearchNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvSearchNotifier extends _i1.Mock implements _i3.TvSearchNotifier {
-  MockTvSearchNotifier() {
+class MockTVSearchNotifier extends _i1.Mock implements _i3.TVSearchNotifier {
+  MockTVSearchNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.SearchTv get searchTv => (super.noSuchMethod(
+  _i2.SearchTV get searchTv => (super.noSuchMethod(
         Invocation.getter(#searchTv),
-        returnValue: _FakeSearchTv_0(
+        returnValue: _FakeSearchTV_0(
           this,
           Invocation.getter(#searchTv),
         ),
-      ) as _i2.SearchTv);
+      ) as _i2.SearchTV);
 
   @override
   _i4.RequestState get state => (super.noSuchMethod(
@@ -60,10 +60,10 @@ class MockTvSearchNotifier extends _i1.Mock implements _i3.TvSearchNotifier {
       ) as _i4.RequestState);
 
   @override
-  List<_i5.Tv> get searchResult => (super.noSuchMethod(
+  List<_i5.TV> get searchResult => (super.noSuchMethod(
         Invocation.getter(#searchResult),
-        returnValue: <_i5.Tv>[],
-      ) as List<_i5.Tv>);
+        returnValue: <_i5.TV>[],
+      ) as List<_i5.TV>);
 
   @override
   String get message => (super.noSuchMethod(

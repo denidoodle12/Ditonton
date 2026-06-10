@@ -10,24 +10,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
-class TvDetailPage extends StatefulWidget {
+class TVDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail-tv';
 
   final int id;
-  TvDetailPage({required this.id});
+  TVDetailPage({required this.id});
 
   @override
-  _TvDetailPageState createState() => _TvDetailPageState();
+  _TVDetailPageState createState() => _TVDetailPageState();
 }
 
-class _TvDetailPageState extends State<TvDetailPage> {
+class _TVDetailPageState extends State<TVDetailPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TvDetailNotifier>(context, listen: false)
-          .fetchTvDetail(widget.id);
-      Provider.of<TvDetailNotifier>(context, listen: false)
+      Provider.of<TVDetailNotifier>(context, listen: false)
+          .fetchTVDetail(widget.id);
+      Provider.of<TVDetailNotifier>(context, listen: false)
           .loadWatchlistStatus(widget.id);
     });
   }
@@ -35,7 +35,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<TvDetailNotifier>(
+      body: Consumer<TVDetailNotifier>(
         builder: (context, provider, child) {
           if (provider.tvState == RequestState.Loading) {
             return Center(
@@ -44,7 +44,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
           } else if (provider.tvState == RequestState.Loaded) {
             final tv = provider.tv;
             return SafeArea(
-              child: TvDetailContent(
+              child: TVDetailContent(
                 tv,
                 provider.tvRecommendations,
                 provider.isAddedToWatchlist,
@@ -59,18 +59,18 @@ class _TvDetailPageState extends State<TvDetailPage> {
   }
 }
 
-class TvDetailContent extends StatefulWidget {
-  final TvDetail tv;
-  final List<Tv> recommendations;
+class TVDetailContent extends StatefulWidget {
+  final TVDetail tv;
+  final List<TV> recommendations;
   final bool isAddedWatchlist;
 
-  TvDetailContent(this.tv, this.recommendations, this.isAddedWatchlist);
+  TVDetailContent(this.tv, this.recommendations, this.isAddedWatchlist);
 
   @override
-  _TvDetailContentState createState() => _TvDetailContentState();
+  _TVDetailContentState createState() => _TVDetailContentState();
 }
 
-class _TvDetailContentState extends State<TvDetailContent> {
+class _TVDetailContentState extends State<TVDetailContent> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -114,25 +114,25 @@ class _TvDetailContentState extends State<TvDetailContent> {
                             FilledButton(
                               onPressed: () async {
                                 if (!widget.isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(context,
+                                  await Provider.of<TVDetailNotifier>(context,
                                           listen: false)
                                       .addWatchlist(widget.tv);
                                 } else {
-                                  await Provider.of<TvDetailNotifier>(context,
+                                  await Provider.of<TVDetailNotifier>(context,
                                           listen: false)
                                       .removeFromWatchlist(widget.tv);
                                 }
 
-                                final message = Provider.of<TvDetailNotifier>(
+                                final message = Provider.of<TVDetailNotifier>(
                                         context,
                                         listen: false)
                                     .watchlistMessage;
 
                                 if (message ==
-                                        TvDetailNotifier
+                                        TVDetailNotifier
                                             .watchlistAddSuccessMessage ||
                                     message ==
-                                        TvDetailNotifier
+                                        TVDetailNotifier
                                             .watchlistRemoveSuccessMessage) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text(message)));
@@ -227,7 +227,7 @@ class _TvDetailContentState extends State<TvDetailContent> {
                                         onTap: () {
                                           Navigator.pushNamed(
                                             context,
-                                            TvSeasonDetailPage.ROUTE_NAME,
+                                            TVSeasonDetailPage.ROUTE_NAME,
                                             arguments: {
                                               'tvId': widget.tv.id,
                                               'seasonNumber':
@@ -246,7 +246,7 @@ class _TvDetailContentState extends State<TvDetailContent> {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<TvDetailNotifier>(
+                            Consumer<TVDetailNotifier>(
                               builder: (context, data, child) {
                                 if (data.recommendationState ==
                                     RequestState.Loading) {
@@ -271,7 +271,7 @@ class _TvDetailContentState extends State<TvDetailContent> {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                TvDetailPage.ROUTE_NAME,
+                                                TVDetailPage.ROUTE_NAME,
                                                 arguments: tv.id,
                                               );
                                             },

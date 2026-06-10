@@ -7,24 +7,24 @@ import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late SearchTv usecase;
-  late MockTvRepository mockTvRepository;
+  late SearchTV usecase;
+  late MockTVRepository mockTVRepository;
 
   setUp(() {
-    mockTvRepository = MockTvRepository();
-    usecase = SearchTv(mockTvRepository);
+    mockTVRepository = MockTVRepository();
+    usecase = SearchTV(mockTVRepository);
   });
 
   final tQuery = 'Squid Game';
-  final tTvList = <Tv>[];
+  final tTVList = <TV>[];
 
   test('should get list of tv from the repository', () async {
     // arrange
-    when(mockTvRepository.searchTv(tQuery))
-        .thenAnswer((_) async => Right(tTvList));
+    when(mockTVRepository.searchTv(tQuery))
+        .thenAnswer((_) async => Right(tTVList));
     // act
     final result = await usecase.execute(tQuery);
     // assert
-    expect(result, Right(tTvList));
+    expect(result, Right(tTVList));
   });
 }

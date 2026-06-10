@@ -12,29 +12,29 @@ import 'package:mockito/mockito.dart';
 
 import 'tv_list_notifier_test.mocks.dart';
 
-@GenerateMocks([GetOnTheAirTv, GetPopularTv, GetTopRatedTv])
+@GenerateMocks([GetOnTheAirTV, GetPopularTV, GetTopRatedTV])
 void main() {
-  late TvListNotifier provider;
-  late MockGetOnTheAirTv mockGetOnTheAirTv;
-  late MockGetPopularTv mockGetPopularTv;
-  late MockGetTopRatedTv mockGetTopRatedTv;
+  late TVListNotifier provider;
+  late MockGetOnTheAirTV mockGetOnTheAirTV;
+  late MockGetPopularTV mockGetPopularTV;
+  late MockGetTopRatedTV mockGetTopRatedTV;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
-    mockGetOnTheAirTv = MockGetOnTheAirTv();
-    mockGetPopularTv = MockGetPopularTv();
-    mockGetTopRatedTv = MockGetTopRatedTv();
-    provider = TvListNotifier(
-      getOnTheAirTv: mockGetOnTheAirTv,
-      getPopularTv: mockGetPopularTv,
-      getTopRatedTv: mockGetTopRatedTv,
+    mockGetOnTheAirTV = MockGetOnTheAirTV();
+    mockGetPopularTV = MockGetPopularTV();
+    mockGetTopRatedTV = MockGetTopRatedTV();
+    provider = TVListNotifier(
+      getOnTheAirTv: mockGetOnTheAirTV,
+      getPopularTv: mockGetPopularTV,
+      getTopRatedTv: mockGetTopRatedTV,
     )..addListener(() {
         listenerCallCount += 1;
       });
   });
 
-  final tTv = Tv(
+  final tTv = TV(
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
     id: 1,
@@ -47,7 +47,7 @@ void main() {
     voteAverage: 1,
     voteCount: 1,
   );
-  final tTvList = <Tv>[tTv];
+  final tTVList = <TV>[tTv];
 
   group('on the air tv', () {
     test('initialState should be Empty', () {
@@ -56,16 +56,16 @@ void main() {
 
     test('should get data from the usecase', () async {
       // arrange
-      when(mockGetOnTheAirTv.execute()).thenAnswer((_) async => Right(tTvList));
+      when(mockGetOnTheAirTV.execute()).thenAnswer((_) async => Right(tTVList));
       // act
       provider.fetchOnTheAirTv();
       // assert
-      verify(mockGetOnTheAirTv.execute());
+      verify(mockGetOnTheAirTV.execute());
     });
 
     test('should change state to Loading when usecase is called', () {
       // arrange
-      when(mockGetOnTheAirTv.execute()).thenAnswer((_) async => Right(tTvList));
+      when(mockGetOnTheAirTV.execute()).thenAnswer((_) async => Right(tTVList));
       // act
       provider.fetchOnTheAirTv();
       // assert
@@ -74,18 +74,18 @@ void main() {
 
     test('should change tv when data is gotten successfully', () async {
       // arrange
-      when(mockGetOnTheAirTv.execute()).thenAnswer((_) async => Right(tTvList));
+      when(mockGetOnTheAirTV.execute()).thenAnswer((_) async => Right(tTVList));
       // act
       await provider.fetchOnTheAirTv();
       // assert
       expect(provider.onTheAirState, RequestState.Loaded);
-      expect(provider.onTheAirTv, tTvList);
+      expect(provider.onTheAirTv, tTVList);
       expect(listenerCallCount, 2);
     });
 
     test('should return error when data is unsuccessful', () async {
       // arrange
-      when(mockGetOnTheAirTv.execute())
+      when(mockGetOnTheAirTV.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchOnTheAirTv();
@@ -99,7 +99,7 @@ void main() {
   group('popular tv', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
+      when(mockGetPopularTV.execute()).thenAnswer((_) async => Right(tTVList));
       // act
       provider.fetchPopularTv();
       // assert
@@ -108,18 +108,18 @@ void main() {
 
     test('should change tv data when data is gotten successfully', () async {
       // arrange
-      when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
+      when(mockGetPopularTV.execute()).thenAnswer((_) async => Right(tTVList));
       // act
       await provider.fetchPopularTv();
       // assert
       expect(provider.popularTvState, RequestState.Loaded);
-      expect(provider.popularTv, tTvList);
+      expect(provider.popularTv, tTVList);
       expect(listenerCallCount, 2);
     });
 
     test('should return error when data is unsuccessful', () async {
       // arrange
-      when(mockGetPopularTv.execute())
+      when(mockGetPopularTV.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchPopularTv();
@@ -133,7 +133,7 @@ void main() {
   group('top rated tv', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
+      when(mockGetTopRatedTV.execute()).thenAnswer((_) async => Right(tTVList));
       // act
       provider.fetchTopRatedTv();
       // assert
@@ -142,18 +142,18 @@ void main() {
 
     test('should change tv data when data is gotten successfully', () async {
       // arrange
-      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
+      when(mockGetTopRatedTV.execute()).thenAnswer((_) async => Right(tTVList));
       // act
       await provider.fetchTopRatedTv();
       // assert
       expect(provider.topRatedTvState, RequestState.Loaded);
-      expect(provider.topRatedTv, tTvList);
+      expect(provider.topRatedTv, tTVList);
       expect(listenerCallCount, 2);
     });
 
     test('should return error when data is unsuccessful', () async {
       // arrange
-      when(mockGetTopRatedTv.execute())
+      when(mockGetTopRatedTV.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchTopRatedTv();

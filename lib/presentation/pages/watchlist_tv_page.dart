@@ -5,19 +5,19 @@ import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WatchlistTvPage extends StatefulWidget {
+class WatchlistTVPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-tv';
 
   @override
-  _WatchlistTvPageState createState() => _WatchlistTvPageState();
+  _WatchlistTVPageState createState() => _WatchlistTVPageState();
 }
 
-class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
+class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<WatchlistTvNotifier>(context, listen: false)
+        Provider.of<WatchlistTVNotifier>(context, listen: false)
             .fetchWatchlistTv());
   }
 
@@ -28,7 +28,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   }
 
   void didPopNext() {
-    Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
+    Provider.of<WatchlistTVNotifier>(context, listen: false).fetchWatchlistTv();
   }
 
   @override
@@ -39,7 +39,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistTvNotifier>(
+        child: Consumer<WatchlistTVNotifier>(
           builder: (context, data, child) {
             if (data.watchlistState == RequestState.Loading) {
               return Center(
@@ -49,7 +49,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = data.watchlistTv[index];
-                  return TvCard(tv);
+                  return TVCard(tv);
                 },
                 itemCount: data.watchlistTv.length,
               );

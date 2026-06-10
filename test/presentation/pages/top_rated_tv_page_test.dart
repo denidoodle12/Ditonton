@@ -10,16 +10,16 @@ import 'package:provider/provider.dart';
 
 import 'top_rated_tv_page_test.mocks.dart';
 
-@GenerateMocks([TopRatedTvNotifier])
+@GenerateMocks([TopRatedTVNotifier])
 void main() {
-  late MockTopRatedTvNotifier mockNotifier;
+  late MockTopRatedTVNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockTopRatedTvNotifier();
+    mockNotifier = MockTopRatedTVNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TopRatedTvNotifier>.value(
+    return ChangeNotifierProvider<TopRatedTVNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,
@@ -34,7 +34,7 @@ void main() {
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(TopRatedTVPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
@@ -43,11 +43,11 @@ void main() {
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.tv).thenReturn(<Tv>[]);
+    when(mockNotifier.tv).thenReturn(<TV>[]);
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(TopRatedTVPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
@@ -59,7 +59,7 @@ void main() {
 
     final textFinder = find.byKey(Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(TopRatedTVPage()));
 
     expect(textFinder, findsOneWidget);
   });

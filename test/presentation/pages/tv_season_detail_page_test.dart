@@ -10,16 +10,16 @@ import 'package:provider/provider.dart';
 
 import 'tv_season_detail_page_test.mocks.dart';
 
-@GenerateMocks([TvSeasonDetailNotifier])
+@GenerateMocks([TVSeasonDetailNotifier])
 void main() {
-  late MockTvSeasonDetailNotifier mockNotifier;
+  late MockTVSeasonDetailNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockTvSeasonDetailNotifier();
+    mockNotifier = MockTVSeasonDetailNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TvSeasonDetailNotifier>.value(
+    return ChangeNotifierProvider<TVSeasonDetailNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,
@@ -37,7 +37,7 @@ void main() {
     final centerFinder = find.byType(Center);
 
     await tester.pumpWidget(
-        _makeTestableWidget(TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
+        _makeTestableWidget(TVSeasonDetailPage(tvId: 1, seasonNumber: 1)));
 
     expect(centerFinder, findsWidgets);
     expect(progressBarFinder, findsOneWidget);
@@ -63,7 +63,7 @@ void main() {
     final listViewFinder = find.byType(ListView);
 
     await tester.pumpWidget(
-        _makeTestableWidget(TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
+        _makeTestableWidget(TVSeasonDetailPage(tvId: 1, seasonNumber: 1)));
 
     expect(listViewFinder, findsOneWidget);
     expect(find.text('1. Episode 1'), findsOneWidget);
@@ -78,7 +78,7 @@ void main() {
     final textFinder = find.text('Error message');
 
     await tester.pumpWidget(
-        _makeTestableWidget(TvSeasonDetailPage(tvId: 1, seasonNumber: 1)));
+        _makeTestableWidget(TVSeasonDetailPage(tvId: 1, seasonNumber: 1)));
 
     expect(textFinder, findsOneWidget);
   });

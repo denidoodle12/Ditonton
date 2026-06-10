@@ -27,8 +27,8 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeGetTopRatedTv_0 extends _i1.SmartFake implements _i2.GetTopRatedTv {
-  _FakeGetTopRatedTv_0(
+class _FakeGetTopRatedTV_0 extends _i1.SmartFake implements _i2.GetTopRatedTV {
+  _FakeGetTopRatedTV_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -37,23 +37,23 @@ class _FakeGetTopRatedTv_0 extends _i1.SmartFake implements _i2.GetTopRatedTv {
         );
 }
 
-/// A class which mocks [TopRatedTvNotifier].
+/// A class which mocks [TopRatedTVNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTopRatedTvNotifier extends _i1.Mock
-    implements _i3.TopRatedTvNotifier {
-  MockTopRatedTvNotifier() {
+class MockTopRatedTVNotifier extends _i1.Mock
+    implements _i3.TopRatedTVNotifier {
+  MockTopRatedTVNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetTopRatedTv get getTopRatedTv => (super.noSuchMethod(
+  _i2.GetTopRatedTV get getTopRatedTv => (super.noSuchMethod(
         Invocation.getter(#getTopRatedTv),
-        returnValue: _FakeGetTopRatedTv_0(
+        returnValue: _FakeGetTopRatedTV_0(
           this,
           Invocation.getter(#getTopRatedTv),
         ),
-      ) as _i2.GetTopRatedTv);
+      ) as _i2.GetTopRatedTV);
 
   @override
   _i4.RequestState get state => (super.noSuchMethod(
@@ -62,10 +62,10 @@ class MockTopRatedTvNotifier extends _i1.Mock
       ) as _i4.RequestState);
 
   @override
-  List<_i5.Tv> get tv => (super.noSuchMethod(
+  List<_i5.TV> get tv => (super.noSuchMethod(
         Invocation.getter(#tv),
-        returnValue: <_i5.Tv>[],
-      ) as List<_i5.Tv>);
+        returnValue: <_i5.TV>[],
+      ) as List<_i5.TV>);
 
   @override
   String get message => (super.noSuchMethod(

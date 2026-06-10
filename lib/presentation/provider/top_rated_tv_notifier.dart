@@ -3,16 +3,16 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_tv.dart';
 import 'package:flutter/foundation.dart';
 
-class TopRatedTvNotifier extends ChangeNotifier {
-  final GetTopRatedTv getTopRatedTv;
+class TopRatedTVNotifier extends ChangeNotifier {
+  final GetTopRatedTV getTopRatedTv;
 
-  TopRatedTvNotifier({required this.getTopRatedTv});
+  TopRatedTVNotifier({required this.getTopRatedTv});
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Tv> _tv = [];
-  List<Tv> get tv => _tv;
+  List<TV> _tv = [];
+  List<TV> get tv => _tv;
 
   String _message = '';
   String get message => _message;

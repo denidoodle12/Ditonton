@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final tTvModel = TvModel(
+  final tTVModel = TVModel(
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
     id: 1,
@@ -17,7 +17,7 @@ void main() {
     voteCount: 1,
   );
 
-  final tTv = Tv(
+  final tTv = TV(
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
     id: 1,
@@ -31,8 +31,8 @@ void main() {
     voteCount: 1,
   );
 
-  test('should be a subclass of Tv entity', () async {
-    final result = tTvModel.toEntity();
+  test('should be a subclass of TV entity', () async {
+    final result = tTVModel.toEntity();
     expect(result, tTv);
   });
 }

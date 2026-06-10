@@ -3,16 +3,16 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/search_tv.dart';
 import 'package:flutter/foundation.dart';
 
-class TvSearchNotifier extends ChangeNotifier {
-  final SearchTv searchTv;
+class TVSearchNotifier extends ChangeNotifier {
+  final SearchTV searchTv;
 
-  TvSearchNotifier({required this.searchTv});
+  TVSearchNotifier({required this.searchTv});
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Tv> _searchResult = [];
-  List<Tv> get searchResult => _searchResult;
+  List<TV> _searchResult = [];
+  List<TV> get searchResult => _searchResult;
 
   String _message = '';
   String get message => _message;

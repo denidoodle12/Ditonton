@@ -4,19 +4,19 @@ import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OnTheAirTvPage extends StatefulWidget {
+class OnTheAirTVPage extends StatefulWidget {
   static const ROUTE_NAME = '/on-the-air-tv';
 
   @override
-  _OnTheAirTvPageState createState() => _OnTheAirTvPageState();
+  _OnTheAirTVPageState createState() => _OnTheAirTVPageState();
 }
 
-class _OnTheAirTvPageState extends State<OnTheAirTvPage> {
+class _OnTheAirTVPageState extends State<OnTheAirTVPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<TvListNotifier>(context, listen: false).fetchOnTheAirTv());
+        Provider.of<TVListNotifier>(context, listen: false).fetchOnTheAirTv());
   }
 
   @override
@@ -27,7 +27,7 @@ class _OnTheAirTvPageState extends State<OnTheAirTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TvListNotifier>(
+        child: Consumer<TVListNotifier>(
           builder: (context, data, child) {
             if (data.onTheAirState == RequestState.Loading) {
               return Center(
@@ -37,7 +37,7 @@ class _OnTheAirTvPageState extends State<OnTheAirTvPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = data.onTheAirTv[index];
-                  return TvCard(tv);
+                  return TVCard(tv);
                 },
                 itemCount: data.onTheAirTv.length,
               );

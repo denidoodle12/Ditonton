@@ -10,16 +10,16 @@ import 'package:provider/provider.dart';
 
 import 'search_tv_page_test.mocks.dart';
 
-@GenerateMocks([TvSearchNotifier])
+@GenerateMocks([TVSearchNotifier])
 void main() {
-  late MockTvSearchNotifier mockNotifier;
+  late MockTVSearchNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockTvSearchNotifier();
+    mockNotifier = MockTVSearchNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TvSearchNotifier>.value(
+    return ChangeNotifierProvider<TVSearchNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,
@@ -34,7 +34,7 @@ void main() {
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(SearchTVPage()));
 
     expect(centerFinder, findsWidgets);
     expect(progressBarFinder, findsOneWidget);
@@ -43,11 +43,11 @@ void main() {
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.searchResult).thenReturn(<Tv>[]);
+    when(mockNotifier.searchResult).thenReturn(<TV>[]);
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(SearchTVPage()));
 
     expect(listViewFinder, findsOneWidget);
   });

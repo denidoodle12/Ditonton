@@ -27,8 +27,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeTvRepository_0 extends _i1.SmartFake implements _i2.TvRepository {
-  _FakeTvRepository_0(
+class _FakeTVRepository_0 extends _i1.SmartFake implements _i2.TVRepository {
+  _FakeTVRepository_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -47,107 +47,107 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
         );
 }
 
-/// A class which mocks [GetOnTheAirTv].
+/// A class which mocks [GetOnTheAirTV].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetOnTheAirTv extends _i1.Mock implements _i4.GetOnTheAirTv {
-  MockGetOnTheAirTv() {
+class MockGetOnTheAirTV extends _i1.Mock implements _i4.GetOnTheAirTV {
+  MockGetOnTheAirTV() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository => (super.noSuchMethod(
+  _i2.TVRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeTvRepository_0(
+        returnValue: _FakeTVRepository_0(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i2.TvRepository);
+      ) as _i2.TVRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>> execute() =>
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>> execute() =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>>.value(
-            _FakeEither_1<_i6.Failure, List<_i7.Tv>>(
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>>.value(
+            _FakeEither_1<_i6.Failure, List<_i7.TV>>(
           this,
           Invocation.method(
             #execute,
             [],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>>);
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>>);
 }
 
-/// A class which mocks [GetPopularTv].
+/// A class which mocks [GetPopularTV].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetPopularTv extends _i1.Mock implements _i8.GetPopularTv {
-  MockGetPopularTv() {
+class MockGetPopularTV extends _i1.Mock implements _i8.GetPopularTV {
+  MockGetPopularTV() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository => (super.noSuchMethod(
+  _i2.TVRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeTvRepository_0(
+        returnValue: _FakeTVRepository_0(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i2.TvRepository);
+      ) as _i2.TVRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>> execute() =>
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>> execute() =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>>.value(
-            _FakeEither_1<_i6.Failure, List<_i7.Tv>>(
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>>.value(
+            _FakeEither_1<_i6.Failure, List<_i7.TV>>(
           this,
           Invocation.method(
             #execute,
             [],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>>);
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>>);
 }
 
-/// A class which mocks [GetTopRatedTv].
+/// A class which mocks [GetTopRatedTV].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTopRatedTv extends _i1.Mock implements _i9.GetTopRatedTv {
-  MockGetTopRatedTv() {
+class MockGetTopRatedTV extends _i1.Mock implements _i9.GetTopRatedTV {
+  MockGetTopRatedTV() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository => (super.noSuchMethod(
+  _i2.TVRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeTvRepository_0(
+        returnValue: _FakeTVRepository_0(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i2.TvRepository);
+      ) as _i2.TVRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>> execute() =>
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>> execute() =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>>.value(
-            _FakeEither_1<_i6.Failure, List<_i7.Tv>>(
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>>.value(
+            _FakeEither_1<_i6.Failure, List<_i7.TV>>(
           this,
           Invocation.method(
             #execute,
             [],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Tv>>>);
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>>);
 }

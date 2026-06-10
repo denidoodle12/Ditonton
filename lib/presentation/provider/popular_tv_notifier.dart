@@ -3,16 +3,16 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_popular_tv.dart';
 import 'package:flutter/foundation.dart';
 
-class PopularTvNotifier extends ChangeNotifier {
-  final GetPopularTv getPopularTv;
+class PopularTVNotifier extends ChangeNotifier {
+  final GetPopularTV getPopularTv;
 
-  PopularTvNotifier(this.getPopularTv);
+  PopularTVNotifier(this.getPopularTv);
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Tv> _tv = [];
-  List<Tv> get tv => _tv;
+  List<TV> _tv = [];
+  List<TV> get tv => _tv;
 
   String _message = '';
   String get message => _message;

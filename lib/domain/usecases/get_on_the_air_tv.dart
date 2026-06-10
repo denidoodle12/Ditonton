@@ -3,12 +3,12 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
 import 'package:ditonton/common/failure.dart';
 
-class GetOnTheAirTv {
-  final TvRepository repository;
+class GetOnTheAirTV {
+  final TVRepository repository;
 
-  GetOnTheAirTv(this.repository);
+  GetOnTheAirTV(this.repository);
 
-  Future<Either<Failure, List<Tv>>> execute() {
+  Future<Either<Failure, List<TV>>> execute() {
     return repository.getOnTheAirTv();
   }
 }

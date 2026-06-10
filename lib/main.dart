@@ -64,25 +64,25 @@ class MyApp extends StatelessWidget {
         ),
         // TV Series providers
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
+          create: (_) => di.locator<TVListNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvDetailNotifier>(),
+          create: (_) => di.locator<TVDetailNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeasonDetailNotifier>(),
+          create: (_) => di.locator<TVSeasonDetailNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
+          create: (_) => di.locator<TVSearchNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvNotifier>(),
+          create: (_) => di.locator<PopularTVNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvNotifier>(),
+          create: (_) => di.locator<TopRatedTVNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvNotifier>(),
+          create: (_) => di.locator<WatchlistTVNotifier>(),
         ),
       ],
       child: MaterialApp(
@@ -115,33 +115,33 @@ class MyApp extends StatelessWidget {
             case WatchlistMoviesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             // TV Series routes
-            case HomeTvPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => HomeTvPage());
-            case PopularTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => PopularTvPage());
-            case TopRatedTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => TopRatedTvPage());
-            case OnTheAirTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => OnTheAirTvPage());
-            case TvDetailPage.ROUTE_NAME:
+            case HomeTVPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => HomeTVPage());
+            case PopularTVPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTVPage());
+            case TopRatedTVPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTVPage());
+            case OnTheAirTVPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => OnTheAirTVPage());
+            case TVDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return MaterialPageRoute(
-                builder: (_) => TvDetailPage(id: id),
+                builder: (_) => TVDetailPage(id: id),
                 settings: settings,
               );
-            case TvSeasonDetailPage.ROUTE_NAME:
+            case TVSeasonDetailPage.ROUTE_NAME:
               final args = settings.arguments as Map<String, dynamic>;
               return MaterialPageRoute(
-                builder: (_) => TvSeasonDetailPage(
+                builder: (_) => TVSeasonDetailPage(
                   tvId: args['tvId'],
                   seasonNumber: args['seasonNumber'],
                 ),
                 settings: settings,
               );
-            case SearchTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => SearchTvPage());
-            case WatchlistTvPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistTvPage());
+            case SearchTVPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => SearchTVPage());
+            case WatchlistTVPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => WatchlistTVPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:

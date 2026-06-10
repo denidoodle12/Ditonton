@@ -4,10 +4,10 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:flutter/material.dart';
 
-class TvCard extends StatelessWidget {
-  final Tv tv;
+class TVCard extends StatelessWidget {
+  final TV tv;
 
-  TvCard(this.tv);
+  TVCard(this.tv);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class TvCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            TvDetailPage.ROUTE_NAME,
+            TVDetailPage.ROUTE_NAME,
             arguments: tv.id,
           );
         },

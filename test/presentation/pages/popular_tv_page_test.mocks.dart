@@ -26,8 +26,8 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeGetPopularTv_0 extends _i1.SmartFake implements _i2.GetPopularTv {
-  _FakeGetPopularTv_0(
+class _FakeGetPopularTV_0 extends _i1.SmartFake implements _i2.GetPopularTV {
+  _FakeGetPopularTV_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -36,22 +36,22 @@ class _FakeGetPopularTv_0 extends _i1.SmartFake implements _i2.GetPopularTv {
         );
 }
 
-/// A class which mocks [PopularTvNotifier].
+/// A class which mocks [PopularTVNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPopularTvNotifier extends _i1.Mock implements _i3.PopularTvNotifier {
-  MockPopularTvNotifier() {
+class MockPopularTVNotifier extends _i1.Mock implements _i3.PopularTVNotifier {
+  MockPopularTVNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetPopularTv get getPopularTv => (super.noSuchMethod(
+  _i2.GetPopularTV get getPopularTv => (super.noSuchMethod(
         Invocation.getter(#getPopularTv),
-        returnValue: _FakeGetPopularTv_0(
+        returnValue: _FakeGetPopularTV_0(
           this,
           Invocation.getter(#getPopularTv),
         ),
-      ) as _i2.GetPopularTv);
+      ) as _i2.GetPopularTV);
 
   @override
   _i4.RequestState get state => (super.noSuchMethod(
@@ -60,10 +60,10 @@ class MockPopularTvNotifier extends _i1.Mock implements _i3.PopularTvNotifier {
       ) as _i4.RequestState);
 
   @override
-  List<_i5.Tv> get tv => (super.noSuchMethod(
+  List<_i5.TV> get tv => (super.noSuchMethod(
         Invocation.getter(#tv),
-        returnValue: <_i5.Tv>[],
-      ) as List<_i5.Tv>);
+        returnValue: <_i5.TV>[],
+      ) as List<_i5.TV>);
 
   @override
   String get message => (super.noSuchMethod(
