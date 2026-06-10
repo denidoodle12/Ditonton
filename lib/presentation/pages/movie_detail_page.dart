@@ -35,7 +35,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<MovieDetailNotifier>(
-        builder: (context, provider, child) {
+        builder: (context, provider, _) {
           if (provider.movieState == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
@@ -84,7 +84,7 @@ class DetailContent extends StatelessWidget {
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: kRichBlack,
+                  color: richBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 padding: const EdgeInsets.only(
@@ -103,7 +103,7 @@ class DetailContent extends StatelessWidget {
                           children: [
                             Text(
                               movie.title,
-                              style: kHeading5,
+                              style: heading5,
                             ),
                             FilledButton(
                               onPressed: () async {
@@ -165,7 +165,7 @@ class DetailContent extends StatelessWidget {
                                   itemCount: 5,
                                   itemBuilder: (context, index) => Icon(
                                     Icons.star,
-                                    color: kMikadoYellow,
+                                    color: mikadoYellow,
                                   ),
                                   itemSize: 24,
                                 ),
@@ -175,7 +175,7 @@ class DetailContent extends StatelessWidget {
                             SizedBox(height: 16),
                             Text(
                               'Overview',
-                              style: kHeading6,
+                              style: heading6,
                             ),
                             Text(
                               movie.overview,
@@ -183,10 +183,10 @@ class DetailContent extends StatelessWidget {
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',
-                              style: kHeading6,
+                              style: heading6,
                             ),
                             Consumer<MovieDetailNotifier>(
-                              builder: (context, data, child) {
+                              builder: (context, data, _) {
                                 if (data.recommendationState ==
                                     RequestState.Loading) {
                                   return Center(
@@ -265,7 +265,7 @@ class DetailContent extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: kRichBlack,
+            backgroundColor: richBlack,
             foregroundColor: Colors.white,
             child: IconButton(
               icon: Icon(Icons.arrow_back),

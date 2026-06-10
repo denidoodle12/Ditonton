@@ -38,7 +38,7 @@ class TVCard extends StatelessWidget {
                       tv.name ?? '-',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: kHeading6,
+                      style: heading6,
                     ),
                     SizedBox(height: 16),
                     Text(

@@ -96,9 +96,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             children: [
               Text(
                 'Now Playing',
-                style: kHeading6,
+                style: heading6,
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
+              Consumer<MovieListNotifier>(builder: (context, data, _) {
                 final state = data.nowPlayingState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -115,7 +115,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
+              Consumer<MovieListNotifier>(builder: (context, data, _) {
                 final state = data.popularMoviesState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -132,7 +132,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
+              Consumer<MovieListNotifier>(builder: (context, data, _) {
                 final state = data.topRatedMoviesState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -157,7 +157,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       children: [
         Text(
           title,
-          style: kHeading6,
+          style: heading6,
         ),
         InkWell(
           onTap: onTap,

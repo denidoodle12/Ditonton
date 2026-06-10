@@ -19,26 +19,30 @@ class EpisodeModel extends Equatable {
     required this.seasonNumber,
     required this.voteAverage,
   });
-  factory EpisodeModel.fromJson(Map<String, dynamic> json) => EpisodeModel(
-        id: json['id'],
-        name: json['name'],
-        overview: json['overview'],
-        stillPath: json['still_path'],
-        airDate: json['air_date'],
-        episodeNumber: json['episode_number'],
-        seasonNumber: json['season_number'],
-        voteAverage: json['vote_average'].toDouble(),
-      );
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'overview': overview,
-        'still_path': stillPath,
-        'air_date': airDate,
-        'episode_number': episodeNumber,
-        'season_number': seasonNumber,
-        'vote_average': voteAverage,
-      };
+  factory EpisodeModel.fromJson(Map<String, dynamic> json) {
+    return EpisodeModel(
+      id: json['id'],
+      name: json['name'],
+      overview: json['overview'],
+      stillPath: json['still_path'],
+      airDate: json['air_date'],
+      episodeNumber: json['episode_number'],
+      seasonNumber: json['season_number'],
+      voteAverage: json['vote_average'].toDouble(),
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'overview': overview,
+      'still_path': stillPath,
+      'air_date': airDate,
+      'episode_number': episodeNumber,
+      'season_number': seasonNumber,
+      'vote_average': voteAverage,
+    };
+  }
   Episode toEntity() {
     return Episode(
       id: this.id,

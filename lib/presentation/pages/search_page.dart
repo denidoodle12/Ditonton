@@ -34,10 +34,10 @@ class SearchPage extends StatelessWidget {
             SizedBox(height: 16),
             Text(
               'Search Result',
-              style: kHeading6,
+              style: heading6,
             ),
             Consumer<MovieSearchNotifier>(
-              builder: (context, data, child) {
+              builder: (context, data, _) {
                 if (data.state == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),

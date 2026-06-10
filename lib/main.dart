@@ -88,11 +88,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
-          colorScheme: kColorScheme,
-          primaryColor: kRichBlack,
-          scaffoldBackgroundColor: kRichBlack,
-          textTheme: kTextTheme,
-          drawerTheme: kDrawerTheme,
+          colorScheme: colorScheme,
+          primaryColor: richBlack,
+          scaffoldBackgroundColor: richBlack,
+          textTheme: textTheme,
+          drawerTheme: drawerTheme,
         ),
         home: HomeMoviePage(),
         navigatorObservers: [routeObserver],

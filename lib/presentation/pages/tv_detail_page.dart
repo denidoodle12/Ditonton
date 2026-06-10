@@ -36,7 +36,7 @@ class _TVDetailPageState extends State<TVDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<TVDetailNotifier>(
-        builder: (context, provider, child) {
+        builder: (context, provider, _) {
           if (provider.tvState == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
@@ -90,7 +90,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: kRichBlack,
+                  color: richBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 padding: const EdgeInsets.only(
@@ -109,7 +109,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
                           children: [
                             Text(
                               widget.tv.name,
-                              style: kHeading5,
+                              style: heading5,
                             ),
                             FilledButton(
                               onPressed: () async {
@@ -169,7 +169,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
                                   itemCount: 5,
                                   itemBuilder: (context, index) => Icon(
                                     Icons.star,
-                                    color: kMikadoYellow,
+                                    color: mikadoYellow,
                                   ),
                                   itemSize: 24,
                                 ),
@@ -179,7 +179,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
                             SizedBox(height: 16),
                             Text(
                               'Overview',
-                              style: kHeading6,
+                              style: heading6,
                             ),
                             Text(
                               widget.tv.overview,
@@ -189,7 +189,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
                             if (widget.tv.seasons.isNotEmpty) ...[
                               Text(
                                 'Seasons',
-                                style: kHeading6,
+                                style: heading6,
                               ),
                               SizedBox(height: 8),
                               ...widget.tv.seasons.map((season) {
@@ -244,10 +244,10 @@ class _TVDetailContentState extends State<TVDetailContent> {
                             ],
                             Text(
                               'Recommendations',
-                              style: kHeading6,
+                              style: heading6,
                             ),
                             Consumer<TVDetailNotifier>(
-                              builder: (context, data, child) {
+                              builder: (context, data, _) {
                                 if (data.recommendationState ==
                                     RequestState.Loading) {
                                   return Center(
@@ -326,7 +326,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: kRichBlack,
+            backgroundColor: richBlack,
             foregroundColor: Colors.white,
             child: IconButton(
               icon: Icon(Icons.arrow_back),

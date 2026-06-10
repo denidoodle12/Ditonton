@@ -33,7 +33,7 @@ class _TVSeasonDetailPageState extends State<TVSeasonDetailPage> {
         title: Text('Season ${widget.seasonNumber} Episodes'),
       ),
       body: Consumer<TVSeasonDetailNotifier>(
-        builder: (context, provider, child) {
+        builder: (context, provider, _) {
           if (provider.seasonState == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),

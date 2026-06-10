@@ -40,7 +40,7 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<WatchlistTVNotifier>(
-          builder: (context, data, child) {
+          builder: (context, data, _) {
             if (data.watchlistState == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),

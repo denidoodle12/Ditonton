@@ -29,7 +29,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<TopRatedMoviesNotifier>(
-          builder: (context, data, child) {
+          builder: (context, data, _) {
             if (data.state == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),

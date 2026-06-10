@@ -28,7 +28,7 @@ class _OnTheAirTVPageState extends State<OnTheAirTVPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<TVListNotifier>(
-          builder: (context, data, child) {
+          builder: (context, data, _) {
             if (data.onTheAirState == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),

@@ -108,7 +108,7 @@ class _HomeTVPageState extends State<HomeTVPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, OnTheAirTVPage.ROUTE_NAME),
               ),
-              Consumer<TVListNotifier>(builder: (context, data, child) {
+              Consumer<TVListNotifier>(builder: (context, data, _) {
                 final state = data.onTheAirState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -125,7 +125,7 @@ class _HomeTVPageState extends State<HomeTVPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTVPage.ROUTE_NAME),
               ),
-              Consumer<TVListNotifier>(builder: (context, data, child) {
+              Consumer<TVListNotifier>(builder: (context, data, _) {
                 final state = data.popularTvState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -142,7 +142,7 @@ class _HomeTVPageState extends State<HomeTVPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedTVPage.ROUTE_NAME),
               ),
-              Consumer<TVListNotifier>(builder: (context, data, child) {
+              Consumer<TVListNotifier>(builder: (context, data, _) {
                 final state = data.topRatedTvState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -167,7 +167,7 @@ class _HomeTVPageState extends State<HomeTVPage> {
       children: [
         Text(
           title,
-          style: kHeading6,
+          style: heading6,
         ),
         InkWell(
           onTap: onTap,

@@ -6,15 +6,19 @@ class TVResponse extends Equatable {
 
   TVResponse({required this.tvList});
 
-  factory TVResponse.fromJson(Map<String, dynamic> json) => TVResponse(
-        tvList: List<TVModel>.from((json["results"] as List)
-            .map((x) => TVModel.fromJson(x))
-            .where((element) => element.posterPath != null)),
-      );
+  factory TVResponse.fromJson(Map<String, dynamic> json) {
+    return TVResponse(
+      tvList: List<TVModel>.from((json["results"] as List)
+          .map((x) => TVModel.fromJson(x))
+          .where((element) => element.posterPath != null)),
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "results": List<dynamic>.from(tvList.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      "results": List<dynamic>.from(tvList.map((x) => x.toJson())),
+    };
+  }
 
   @override
   List<Object> get props => [tvList];

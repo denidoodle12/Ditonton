@@ -42,7 +42,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<WatchlistMovieNotifier>(
-          builder: (context, data, child) {
+          builder: (context, data, _) {
             if (data.watchlistState == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),
