@@ -28,13 +28,28 @@ import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_season_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_tv_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ditonton/injection.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  // Pass all uncaught Flutter framework errors to Crashlytics
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  // Pass all uncaught async Dart errors to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   await di.init();
   runApp(MyApp());
 }
@@ -96,7 +111,10 @@ class MyApp extends StatelessWidget {
           drawerTheme: drawerTheme,
         ),
         home: HomeMoviePage(),
-        navigatorObservers: [routeObserver],
+        navigatorObservers: [
+          routeObserver,
+          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+        ],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
