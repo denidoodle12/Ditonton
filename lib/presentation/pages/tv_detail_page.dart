@@ -1,8 +1,9 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv/tv_detail/tv_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv/tv_detail/tv_detail_event.dart';
+import 'package:ditonton/presentation/bloc/tv/tv_detail/tv_detail_state.dart';
 import 'package:ditonton/presentation/widgets/tv_detail_content.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TVDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail-tv';
@@ -19,33 +20,32 @@ class _TVDetailPageState extends State<TVDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TVDetailNotifier>(context, listen: false)
-          .fetchTVDetail(widget.id);
-      Provider.of<TVDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
+      context.read<TVDetailBloc>().add(FetchTVDetail(widget.id));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<TVDetailNotifier>(
-        builder: (context, provider, _) {
-          if (provider.tvState == RequestState.Loading) {
+      body: BlocBuilder<TVDetailBloc, TVDetailState>(
+        builder: (context, state) {
+          if (state is TVDetailLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.tvState == RequestState.Loaded) {
-            final tv = provider.tv;
+          } else if (state is TVDetailLoaded) {
+            final tv = state.tv;
             return SafeArea(
               child: TVDetailContent(
                 tv,
-                provider.tvRecommendations,
-                provider.isAddedToWatchlist,
+                state.recommendations,
+                state.isAddedToWatchlist,
               ),
             );
+          } else if (state is TVDetailError) {
+            return Text(state.message);
           } else {
-            return Text(provider.message);
+            return Container();
           }
         },
       ),

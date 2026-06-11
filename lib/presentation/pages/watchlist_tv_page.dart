@@ -1,9 +1,10 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv/watchlist_tv/watchlist_tv_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv/watchlist_tv/watchlist_tv_event.dart';
+import 'package:ditonton/presentation/bloc/tv/watchlist_tv/watchlist_tv_state.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistTVPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-tv';
@@ -16,9 +17,8 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTVNotifier>(context, listen: false)
-            .fetchWatchlistTv());
+    Future.microtask(
+        () => context.read<WatchlistTVBloc>().add(FetchWatchlistTV()));
   }
 
   @override
@@ -28,7 +28,7 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
   }
 
   void didPopNext() {
-    Provider.of<WatchlistTVNotifier>(context, listen: false).fetchWatchlistTv();
+    context.read<WatchlistTVBloc>().add(FetchWatchlistTV());
   }
 
   @override
@@ -39,14 +39,14 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistTVNotifier>(
-          builder: (context, data, _) {
-            if (data.watchlistState == RequestState.Loading) {
+        child: BlocBuilder<WatchlistTVBloc, WatchlistTVState>(
+          builder: (context, state) {
+            if (state is WatchlistTVLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.watchlistState == RequestState.Loaded) {
-              if (data.watchlistTv.isEmpty) {
+            } else if (state is WatchlistTVLoaded) {
+              if (state.tvList.isEmpty) {
                 return Center(
                   key: Key('empty_message'),
                   child: Column(
@@ -61,16 +61,18 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
               }
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.watchlistTv[index];
+                  final tv = state.tvList[index];
                   return TVCard(tv);
                 },
-                itemCount: data.watchlistTv.length,
+                itemCount: state.tvList.length,
               );
-            } else {
+            } else if (state is WatchlistTVError) {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
+            } else {
+              return Container();
             }
           },
         ),

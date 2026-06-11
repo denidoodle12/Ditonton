@@ -1,8 +1,9 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv_season_detail_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv/tv_season_detail/tv_season_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv/tv_season_detail/tv_season_detail_event.dart';
+import 'package:ditonton/presentation/bloc/tv/tv_season_detail/tv_season_detail_state.dart';
 import 'package:ditonton/presentation/widgets/episode_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TVSeasonDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv-season-detail';
@@ -21,8 +22,12 @@ class _TVSeasonDetailPageState extends State<TVSeasonDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TVSeasonDetailNotifier>(context, listen: false)
-          .fetchTvSeasonDetail(widget.tvId, widget.seasonNumber);
+      context.read<TVSeasonDetailBloc>().add(
+            FetchTVSeasonDetail(
+              tvId: widget.tvId,
+              seasonNumber: widget.seasonNumber,
+            ),
+          );
     });
   }
 
@@ -32,14 +37,14 @@ class _TVSeasonDetailPageState extends State<TVSeasonDetailPage> {
       appBar: AppBar(
         title: Text('Season ${widget.seasonNumber} Episodes'),
       ),
-      body: Consumer<TVSeasonDetailNotifier>(
-        builder: (context, provider, _) {
-          if (provider.seasonState == RequestState.Loading) {
+      body: BlocBuilder<TVSeasonDetailBloc, TVSeasonDetailState>(
+        builder: (context, state) {
+          if (state is TVSeasonDetailLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.seasonState == RequestState.Loaded) {
-            final episodes = provider.episodes;
+          } else if (state is TVSeasonDetailLoaded) {
+            final episodes = state.episodes;
             return ListView.builder(
               itemCount: episodes.length,
               itemBuilder: (context, index) {
@@ -47,10 +52,12 @@ class _TVSeasonDetailPageState extends State<TVSeasonDetailPage> {
                 return EpisodeCard(episode: episode);
               },
             );
-          } else {
+          } else if (state is TVSeasonDetailError) {
             return Center(
-              child: Text(provider.message),
+              child: Text(state.message),
             );
+          } else {
+            return Container();
           }
         },
       ),
