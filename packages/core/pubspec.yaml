@@ -1,0 +1,21 @@
+name: core
+description: Shared core package for Ditonton — entities, common utilities, failures, and database.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  sqflite: ^2.3.3+1
+  path_provider: ^2.1.4
+  google_fonts: ^8.1.0
+  cached_network_image: ^3.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

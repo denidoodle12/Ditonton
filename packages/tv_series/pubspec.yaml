@@ -1,0 +1,24 @@
+name: tv_series
+description: TV Series feature package for Ditonton — data, domain, and presentation layers.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.6
+  cached_network_image: ^3.4.1
+  google_fonts: ^8.1.0
+  flutter_rating_bar: ^4.0.1
+  http: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
