@@ -45,9 +45,13 @@ void main() {
     numberOfEpisodes: 10,
     seasons: [
       Season(
-        id: 1, airDate: '2021-01-01', episodeCount: 10,
-        name: 'Season 1', overview: 'overview',
-        posterPath: '/poster.jpg', seasonNumber: 1,
+        id: 1,
+        airDate: '2021-01-01',
+        episodeCount: 10,
+        name: 'Season 1',
+        overview: 'overview',
+        posterPath: '/poster.jpg',
+        seasonNumber: 1,
       ),
     ],
   );

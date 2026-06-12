@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WatchlistTVBloc extends Bloc<WatchlistTVEvent, WatchlistTVState> {
   final GetWatchlistTV getWatchlistTV;
 
-  WatchlistTVBloc({required this.getWatchlistTV}) : super(WatchlistTVInitial()) {
+  WatchlistTVBloc({required this.getWatchlistTV})
+      : super(WatchlistTVInitial()) {
     on<FetchWatchlistTV>(_onFetchWatchlistTV);
   }
 

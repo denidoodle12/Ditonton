@@ -50,8 +50,8 @@ void main() {
   blocTest<WatchlistTVBloc, WatchlistTVState>(
     'emits [Loading, Error] on failure',
     build: () {
-      when(mockTVRepository.getWatchlistTv()).thenAnswer(
-          (_) async => Left(DatabaseFailure('Database Error')));
+      when(mockTVRepository.getWatchlistTv())
+          .thenAnswer((_) async => Left(DatabaseFailure('Database Error')));
       return bloc;
     },
     act: (b) => b.add(FetchWatchlistTV()),

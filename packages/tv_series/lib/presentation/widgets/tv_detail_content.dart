@@ -66,7 +66,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
                               style: heading5,
                             ),
                             FilledButton(
-                              onPressed: () async {
+                              onPressed: () {
                                 if (!widget.isAddedWatchlist) {
                                   context
                                       .read<TVDetailBloc>()
@@ -75,30 +75,6 @@ class _TVDetailContentState extends State<TVDetailContent> {
                                   context
                                       .read<TVDetailBloc>()
                                       .add(RemoveTVWatchlist(widget.tv));
-                                }
-
-                                final state =
-                                    context.read<TVDetailBloc>().state;
-                                final message = state is TVDetailLoaded
-                                    ? state.watchlistMessage
-                                    : '';
-
-                                if (message ==
-                                        TVDetailBloc
-                                            .watchlistAddSuccessMessage ||
-                                    message ==
-                                        TVDetailBloc
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
-                                } else if (message.isNotEmpty) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text(message),
-                                        );
-                                      });
                                 }
                               },
                               child: Row(
@@ -222,8 +198,7 @@ class _TVDetailContentState extends State<TVDetailContent> {
                                           final tv =
                                               widget.recommendations[index];
                                           return Padding(
-                                            padding:
-                                                const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: InkWell(
                                               onTap: () {
                                                 Navigator.pushReplacementNamed(
@@ -233,28 +208,27 @@ class _TVDetailContentState extends State<TVDetailContent> {
                                                 );
                                               },
                                               child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.all(
+                                                borderRadius: BorderRadius.all(
                                                   Radius.circular(8),
                                                 ),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
                                                       '$BASE_IMAGE_URL${tv.posterPath}',
-                                                  placeholder:
-                                                      (context, url) =>
-                                                          Center(
+                                                  placeholder: (context, url) =>
+                                                      Center(
                                                     child:
                                                         CircularProgressIndicator(),
                                                   ),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      Icon(Icons.error),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Icon(Icons.error),
                                                 ),
                                               ),
                                             ),
                                           );
                                         },
-                                        itemCount: widget.recommendations.length,
+                                        itemCount:
+                                            widget.recommendations.length,
                                       ),
                                     );
                                   } else {

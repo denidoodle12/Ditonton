@@ -44,6 +44,24 @@ class SearchTVPage extends StatelessWidget {
                   );
                 } else if (state is TVSearchLoaded) {
                   final result = state.result;
+                  if (result.isEmpty) {
+                    return Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.search_off,
+                                size: 64, color: Colors.grey),
+                            SizedBox(height: 16),
+                            Text(
+                              'No results found',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),

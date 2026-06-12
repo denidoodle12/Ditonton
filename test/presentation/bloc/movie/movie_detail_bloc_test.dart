@@ -87,8 +87,8 @@ void main() {
     blocTest<MovieDetailBloc, MovieDetailState>(
       'emits [Loading, Error] when detail fetch fails',
       build: () {
-        when(mockMovieRepository.getMovieDetail(tId)).thenAnswer(
-            (_) async => Left(ServerFailure('Server Failure')));
+        when(mockMovieRepository.getMovieDetail(tId))
+            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         when(mockMovieRepository.getMovieRecommendations(tId))
             .thenAnswer((_) async => Right([tMovie]));
         return bloc;

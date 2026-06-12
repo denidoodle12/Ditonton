@@ -59,7 +59,9 @@ void main() {
       (tester) async {
     whenListen(
       mockBloc,
-      Stream.fromIterable([PopularTVLoaded([tTV])]),
+      Stream.fromIterable([
+        PopularTVLoaded([tTV])
+      ]),
       initialState: PopularTVInitial(),
     );
 

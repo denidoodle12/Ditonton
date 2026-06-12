@@ -118,8 +118,7 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   ) async {
     final result = await getWatchListStatus.execute(event.id);
     if (state is MovieDetailLoaded) {
-      emit((state as MovieDetailLoaded)
-          .copyWith(isAddedToWatchlist: result));
+      emit((state as MovieDetailLoaded).copyWith(isAddedToWatchlist: result));
     }
   }
 }

@@ -60,8 +60,8 @@ void main() {
   blocTest<MovieSearchBloc, MovieSearchState>(
     'emits [Loading, Error] when search fails',
     build: () {
-      when(mockMovieRepository.searchMovies('spiderman')).thenAnswer(
-          (_) async => Left(ServerFailure('Server Failure')));
+      when(mockMovieRepository.searchMovies('spiderman'))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return bloc;
     },
     act: (b) => b.add(const SearchMovieQuery('spiderman')),

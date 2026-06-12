@@ -90,8 +90,7 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     FetchTopRatedMovies event,
     Emitter<MovieListState> emit,
   ) async {
-    emit(
-        _currentOrEmpty().copyWith(topRatedMoviesState: RequestState.Loading));
+    emit(_currentOrEmpty().copyWith(topRatedMoviesState: RequestState.Loading));
 
     final result = await getTopRatedMovies.execute();
 

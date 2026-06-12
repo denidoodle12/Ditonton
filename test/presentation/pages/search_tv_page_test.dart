@@ -72,7 +72,9 @@ void main() {
       (tester) async {
     whenListen(
       mockBloc,
-      Stream.fromIterable([TVSearchLoaded([tTV])]),
+      Stream.fromIterable([
+        TVSearchLoaded([tTV])
+      ]),
       initialState: TVSearchInitial(),
     );
 

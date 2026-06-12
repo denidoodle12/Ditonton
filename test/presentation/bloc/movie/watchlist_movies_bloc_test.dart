@@ -17,16 +17,26 @@ void main() {
 
   setUp(() {
     mockMovieRepository = MockMovieRepository();
-    bloc = WatchlistMoviesBloc(getWatchlistMovies: GetWatchlistMovies(mockMovieRepository));
+    bloc = WatchlistMoviesBloc(
+        getWatchlistMovies: GetWatchlistMovies(mockMovieRepository));
   });
 
   tearDown(() => bloc.close());
 
   final tMovie = Movie(
-    adult: false, backdropPath: '/muth.jpg', genreIds: const [14, 28],
-    id: 557, originalTitle: 'Spider-Man', overview: 'overview',
-    popularity: 60.441, posterPath: '/rweI.jpg', releaseDate: '2002-05-01',
-    title: 'Spider-Man', video: false, voteAverage: 7.2, voteCount: 13507,
+    adult: false,
+    backdropPath: '/muth.jpg',
+    genreIds: const [14, 28],
+    id: 557,
+    originalTitle: 'Spider-Man',
+    overview: 'overview',
+    popularity: 60.441,
+    posterPath: '/rweI.jpg',
+    releaseDate: '2002-05-01',
+    title: 'Spider-Man',
+    video: false,
+    voteAverage: 7.2,
+    voteCount: 13507,
   );
 
   test('initial state is WatchlistMoviesInitial', () {
@@ -47,8 +57,8 @@ void main() {
   blocTest<WatchlistMoviesBloc, WatchlistMoviesState>(
     'emits [Loading, Error] on failure',
     build: () {
-      when(mockMovieRepository.getWatchlistMovies()).thenAnswer(
-          (_) async => Left(DatabaseFailure('Database Error')));
+      when(mockMovieRepository.getWatchlistMovies())
+          .thenAnswer((_) async => Left(DatabaseFailure('Database Error')));
       return bloc;
     },
     act: (b) => b.add(FetchWatchlistMovies()),

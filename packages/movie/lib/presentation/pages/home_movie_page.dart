@@ -136,8 +136,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () => Navigator.pushNamed(
-                    context, TopRatedMoviesPage.ROUTE_NAME),
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
               ),
               BlocBuilder<MovieListBloc, MovieListState>(
                 builder: (context, state) {

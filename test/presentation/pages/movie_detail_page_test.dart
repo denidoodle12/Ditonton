@@ -10,8 +10,7 @@ import 'package:movie/presentation/bloc/movie_detail/movie_detail_event.dart';
 import 'package:movie/presentation/bloc/movie_detail/movie_detail_state.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 
-class MockMovieDetailBloc
-    extends MockBloc<MovieDetailEvent, MovieDetailState>
+class MockMovieDetailBloc extends MockBloc<MovieDetailEvent, MovieDetailState>
     implements MovieDetailBloc {}
 
 void main() {

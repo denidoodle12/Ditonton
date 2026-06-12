@@ -33,7 +33,35 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
+      body: BlocConsumer<MovieDetailBloc, MovieDetailState>(
+        listenWhen: (previous, current) {
+          if (previous is MovieDetailLoaded && current is MovieDetailLoaded) {
+            return previous.watchlistMessage != current.watchlistMessage &&
+                current.watchlistMessage.isNotEmpty;
+          }
+          return false;
+        },
+        listener: (context, state) {
+          if (state is MovieDetailLoaded && state.watchlistMessage.isNotEmpty) {
+            if (state.watchlistMessage ==
+                    MovieDetailBloc.watchlistAddSuccessMessage ||
+                state.watchlistMessage ==
+                    MovieDetailBloc.watchlistRemoveSuccessMessage) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.watchlistMessage)),
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Text(state.watchlistMessage),
+                  );
+                },
+              );
+            }
+          }
+        },
         builder: (context, state) {
           if (state is MovieDetailLoading) {
             return Center(
@@ -107,7 +135,7 @@ class DetailContent extends StatelessWidget {
                               style: heading5,
                             ),
                             FilledButton(
-                              onPressed: () async {
+                              onPressed: () {
                                 if (!isAddedWatchlist) {
                                   context
                                       .read<MovieDetailBloc>()
@@ -116,30 +144,6 @@ class DetailContent extends StatelessWidget {
                                   context
                                       .read<MovieDetailBloc>()
                                       .add(RemoveMovieWatchlist(movie));
-                                }
-
-                                final state =
-                                    context.read<MovieDetailBloc>().state;
-                                final message = state is MovieDetailLoaded
-                                    ? state.watchlistMessage
-                                    : '';
-
-                                if (message ==
-                                        MovieDetailBloc
-                                            .watchlistAddSuccessMessage ||
-                                    message ==
-                                        MovieDetailBloc
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
-                                } else if (message.isNotEmpty) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text(message),
-                                        );
-                                      });
                                 }
                               },
                               child: Row(
@@ -203,11 +207,9 @@ class DetailContent extends StatelessWidget {
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index) {
-                                          final movie =
-                                              recommendations[index];
+                                          final movie = recommendations[index];
                                           return Padding(
-                                            padding:
-                                                const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: InkWell(
                                               onTap: () {
                                                 Navigator.pushReplacementNamed(
@@ -217,22 +219,20 @@ class DetailContent extends StatelessWidget {
                                                 );
                                               },
                                               child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.all(
+                                                borderRadius: BorderRadius.all(
                                                   Radius.circular(8),
                                                 ),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
                                                       '$BASE_IMAGE_URL${movie.posterPath}',
-                                                  placeholder:
-                                                      (context, url) =>
-                                                          Center(
+                                                  placeholder: (context, url) =>
+                                                      Center(
                                                     child:
                                                         CircularProgressIndicator(),
                                                   ),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      Icon(Icons.error),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Icon(Icons.error),
                                                 ),
                                               ),
                                             ),

@@ -70,8 +70,8 @@ void main() {
     blocTest<MovieListBloc, MovieListState>(
       'emits MovieListLoaded with error sub-state when now playing fails',
       build: () {
-        when(mockMovieRepository.getNowPlayingMovies()).thenAnswer(
-            (_) async => Left(ServerFailure('Server Failure')));
+        when(mockMovieRepository.getNowPlayingMovies())
+            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         when(mockMovieRepository.getPopularMovies())
             .thenAnswer((_) async => Right(tMovieList));
         when(mockMovieRepository.getTopRatedMovies())

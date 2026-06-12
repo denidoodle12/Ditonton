@@ -55,8 +55,8 @@ void main() {
   blocTest<TVSearchBloc, TVSearchState>(
     'emits [Loading, Error] when search fails',
     build: () {
-      when(mockTVRepository.searchTv('test')).thenAnswer(
-          (_) async => Left(ServerFailure('Server Failure')));
+      when(mockTVRepository.searchTv('test'))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return bloc;
     },
     act: (b) => b.add(const SearchTVQuery('test')),

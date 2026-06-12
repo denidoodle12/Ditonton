@@ -58,8 +58,8 @@ void main() {
   blocTest<TVSeasonDetailBloc, TVSeasonDetailState>(
     'emits [Loading, Error] when fetch season detail fails',
     build: () {
-      when(mockTVRepository.getTvSeasonDetail(tTvId, tSeasonNumber)).thenAnswer(
-          (_) async => Left(ServerFailure('Server Failure')));
+      when(mockTVRepository.getTvSeasonDetail(tTvId, tSeasonNumber))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return bloc;
     },
     act: (b) => b.add(const FetchTVSeasonDetail(

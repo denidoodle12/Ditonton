@@ -37,7 +37,7 @@ This app follows **Clean Architecture** with three layers:
 | SSL Pinning | Network Security |
 | Firebase Analytics | User Analytics |
 | Firebase Crashlytics | Crash Reporting |
-| GitHub Actions | CI/CD |
+| Codemagic | CI/CD |
 
 ---
 
@@ -64,7 +64,26 @@ flutter test
 
 # Run with coverage report
 flutter test --coverage
+
+# Run integration tests (requires connected device/emulator)
+flutter test integration_test/app_test.dart
 ```
+
+---
+
+## 📸 Screenshots
+
+### 🔄 CI/CD — Codemagic Build
+
+![Codemagic Build Status](screenshots/ci_codemagic.png)
+
+### 📊 Firebase Analytics Dashboard
+
+![Firebase Analytics](screenshots/dashboard_analytics.png)
+
+### 🛡️ Firebase Crashlytics Dashboard
+
+![Firebase Crashlytics](screenshots/dashboard_crashlytics.png)
 
 ---
 

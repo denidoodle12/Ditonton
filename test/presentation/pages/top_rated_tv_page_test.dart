@@ -59,7 +59,9 @@ void main() {
       (tester) async {
     whenListen(
       mockBloc,
-      Stream.fromIterable([TopRatedTVLoaded([tTV])]),
+      Stream.fromIterable([
+        TopRatedTVLoaded([tTV])
+      ]),
       initialState: TopRatedTVInitial(),
     );
 

@@ -58,8 +58,8 @@ void main() {
     blocTest<TVListBloc, TVListState>(
       'emits [TVListLoaded(Loading), TVListLoaded(Error)] on failure',
       build: () {
-        when(mockTVRepository.getOnTheAirTv()).thenAnswer(
-            (_) async => Left(ServerFailure('Server Failure')));
+        when(mockTVRepository.getOnTheAirTv())
+            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return bloc;
       },
       act: (b) => b.add(FetchOnTheAirTV()),

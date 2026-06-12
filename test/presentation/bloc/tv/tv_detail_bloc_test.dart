@@ -64,9 +64,13 @@ void main() {
     numberOfEpisodes: 10,
     seasons: [
       Season(
-        id: 1, airDate: '2021-01-01', episodeCount: 10,
-        name: 'Season 1', overview: 'overview',
-        posterPath: '/poster.jpg', seasonNumber: 1,
+        id: 1,
+        airDate: '2021-01-01',
+        episodeCount: 10,
+        name: 'Season 1',
+        overview: 'overview',
+        posterPath: '/poster.jpg',
+        seasonNumber: 1,
       ),
     ],
   );
@@ -93,8 +97,8 @@ void main() {
     blocTest<TVDetailBloc, TVDetailState>(
       'emits [Loading, Error] when detail fetch fails',
       build: () {
-        when(mockTVRepository.getTVDetail(tId)).thenAnswer(
-            (_) async => Left(ServerFailure('Server Failure')));
+        when(mockTVRepository.getTVDetail(tId))
+            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         when(mockTVRepository.getTvRecommendations(tId))
             .thenAnswer((_) async => Right([tTV]));
         return bloc;

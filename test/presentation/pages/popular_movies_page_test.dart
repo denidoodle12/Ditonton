@@ -46,10 +46,19 @@ void main() {
       (tester) async {
     final tMovies = <Movie>[
       Movie(
-        adult: false, backdropPath: '/muth.jpg', genreIds: const [14, 28],
-        id: 557, originalTitle: 'Spider-Man', overview: 'overview',
-        popularity: 60.441, posterPath: '/rweI.jpg', releaseDate: '2002-05-01',
-        title: 'Spider-Man', video: false, voteAverage: 7.2, voteCount: 13507,
+        adult: false,
+        backdropPath: '/muth.jpg',
+        genreIds: const [14, 28],
+        id: 557,
+        originalTitle: 'Spider-Man',
+        overview: 'overview',
+        popularity: 60.441,
+        posterPath: '/rweI.jpg',
+        releaseDate: '2002-05-01',
+        title: 'Spider-Man',
+        video: false,
+        voteAverage: 7.2,
+        voteCount: 13507,
       ),
     ];
 

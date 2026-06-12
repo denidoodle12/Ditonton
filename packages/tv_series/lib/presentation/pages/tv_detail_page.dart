@@ -27,7 +27,35 @@ class _TVDetailPageState extends State<TVDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<TVDetailBloc, TVDetailState>(
+      body: BlocConsumer<TVDetailBloc, TVDetailState>(
+        listenWhen: (previous, current) {
+          if (previous is TVDetailLoaded && current is TVDetailLoaded) {
+            return previous.watchlistMessage != current.watchlistMessage &&
+                current.watchlistMessage.isNotEmpty;
+          }
+          return false;
+        },
+        listener: (context, state) {
+          if (state is TVDetailLoaded && state.watchlistMessage.isNotEmpty) {
+            if (state.watchlistMessage ==
+                    TVDetailBloc.watchlistAddSuccessMessage ||
+                state.watchlistMessage ==
+                    TVDetailBloc.watchlistRemoveSuccessMessage) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.watchlistMessage)),
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Text(state.watchlistMessage),
+                  );
+                },
+              );
+            }
+          }
+        },
         builder: (context, state) {
           if (state is TVDetailLoading) {
             return Center(

@@ -1,5 +1,6 @@
 import 'package:core/domain/entities/episode.dart';
 import 'package:equatable/equatable.dart';
+
 class EpisodeModel extends Equatable {
   final int id;
   final String name;
@@ -43,6 +44,7 @@ class EpisodeModel extends Equatable {
       'vote_average': voteAverage,
     };
   }
+
   Episode toEntity() {
     return Episode(
       id: this.id,
@@ -55,6 +57,7 @@ class EpisodeModel extends Equatable {
       voteAverage: this.voteAverage,
     );
   }
+
   @override
   List<Object?> get props => [
         id,

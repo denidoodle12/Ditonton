@@ -3,8 +3,7 @@ import 'package:movie/presentation/bloc/popular_movies/popular_movies_event.dart
 import 'package:movie/presentation/bloc/popular_movies/popular_movies_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PopularMoviesBloc
-    extends Bloc<PopularMoviesEvent, PopularMoviesState> {
+class PopularMoviesBloc extends Bloc<PopularMoviesEvent, PopularMoviesState> {
   final GetPopularMovies getPopularMovies;
 
   PopularMoviesBloc({required this.getPopularMovies})
