@@ -1,0 +1,37 @@
+workflows:
+  android-workflow:
+    name: Ditonton Android CI
+    max_build_duration: 60
+    environment:
+      flutter: stable
+
+    scripts:
+      - name: Get Flutter packages (root)
+        script: flutter pub get
+
+      - name: Get Flutter packages (core)
+        script: flutter pub get
+        working_directory: packages/core
+
+      - name: Get Flutter packages (movie)
+        script: flutter pub get
+        working_directory: packages/movie
+
+      - name: Get Flutter packages (tv_series)
+        script: flutter pub get
+        working_directory: packages/tv_series
+
+      - name: Run tests (movie)
+        script: flutter test --coverage
+        working_directory: packages/movie
+
+      - name: Run tests (tv_series)
+        script: flutter test --coverage
+        working_directory: packages/tv_series
+
+      - name: Flutter analyze
+        script: flutter analyze
+
+    artifacts:
+      - packages/movie/coverage/lcov.info
+      - packages/tv_series/coverage/lcov.info
