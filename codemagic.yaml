@@ -30,7 +30,7 @@ workflows:
         working_directory: packages/tv_series
 
       - name: Flutter analyze
-        script: flutter analyze
+        script: flutter analyze lib packages/core/lib packages/movie/lib packages/tv_series/lib
 
     artifacts:
       - packages/movie/coverage/lcov.info
