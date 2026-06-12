@@ -1,5 +1,5 @@
 import 'package:core/common/state_enum.dart';
-import 'package:core/domain/entities/movie.dart';
+import 'package:movie/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class MovieListState extends Equatable {

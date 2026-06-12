@@ -1,5 +1,5 @@
 import 'package:core/common/state_enum.dart';
-import 'package:core/domain/entities/tv.dart';
+import 'package:tv_series/domain/entities/tv.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TVListState extends Equatable {

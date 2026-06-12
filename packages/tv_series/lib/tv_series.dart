@@ -16,6 +16,12 @@ export 'data/datasources/tv_remote_data_source.dart';
 // Data - Repositories
 export 'data/repositories/tv_repository_impl.dart';
 
+// Domain - Entities
+export 'domain/entities/episode.dart';
+export 'domain/entities/season.dart';
+export 'domain/entities/tv.dart';
+export 'domain/entities/tv_detail.dart';
+
 // Domain - Repositories
 export 'domain/repositories/tv_repository.dart';
 

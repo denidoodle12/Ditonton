@@ -1,4 +1,4 @@
-import 'package:core/domain/entities/episode.dart';
+import 'package:tv_series/domain/entities/episode.dart';
 import 'package:equatable/equatable.dart';
 
 class EpisodeModel extends Equatable {

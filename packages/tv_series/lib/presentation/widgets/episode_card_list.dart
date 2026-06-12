@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/common/constants.dart';
-import 'package:core/domain/entities/episode.dart';
+import 'package:tv_series/domain/entities/episode.dart';
 import 'package:flutter/material.dart';
 
 class EpisodeCard extends StatelessWidget {

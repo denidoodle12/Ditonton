@@ -14,6 +14,10 @@ export 'data/datasources/movie_remote_data_source.dart';
 // Data - Repositories
 export 'data/repositories/movie_repository_impl.dart';
 
+// Domain - Entities
+export 'domain/entities/movie.dart';
+export 'domain/entities/movie_detail.dart';
+
 // Domain - Repositories
 export 'domain/repositories/movie_repository.dart';
 

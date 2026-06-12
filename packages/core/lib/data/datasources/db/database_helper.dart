@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:core/data/models/movie_table.dart';
-import 'package:core/data/models/tv_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -70,17 +68,17 @@ class DatabaseHelper {
   }
 
   // Movie Watchlist methods
-  Future<int> insertWatchlist(MovieTable movie) async {
+  Future<int> insertWatchlist(Map<String, dynamic> movie) async {
     final db = await database;
-    return await db!.insert(_tblWatchlist, movie.toJson());
+    return await db!.insert(_tblWatchlist, movie);
   }
 
-  Future<int> removeWatchlist(MovieTable movie) async {
+  Future<int> removeWatchlist(int id) async {
     final db = await database;
     return await db!.delete(
       _tblWatchlist,
       where: 'id = ?',
-      whereArgs: [movie.id],
+      whereArgs: [id],
     );
   }
 
@@ -107,17 +105,17 @@ class DatabaseHelper {
   }
 
   // TV Watchlist methods
-  Future<int> insertTvWatchlist(TVTable tv) async {
+  Future<int> insertTvWatchlist(Map<String, dynamic> tv) async {
     final db = await database;
-    return await db!.insert(_tblTvWatchlist, tv.toJson());
+    return await db!.insert(_tblTvWatchlist, tv);
   }
 
-  Future<int> removeTvWatchlist(TVTable tv) async {
+  Future<int> removeTvWatchlist(int id) async {
     final db = await database;
     return await db!.delete(
       _tblTvWatchlist,
       where: 'id = ?',
-      whereArgs: [tv.id],
+      whereArgs: [id],
     );
   }
 

@@ -1,0 +1,52 @@
+name: Ditonton CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Run Tests & Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.0'
+          channel: 'stable'
+          cache: true
+
+      - name: Install lcov
+        run: sudo apt-get install -y lcov
+
+      - name: Install root dependencies
+        run: flutter pub get
+
+      - name: Install packages/core dependencies
+        run: flutter pub get
+        working-directory: packages/core
+
+      - name: Install packages/movie dependencies
+        run: flutter pub get
+        working-directory: packages/movie
+
+      - name: Install packages/tv_series dependencies
+        run: flutter pub get
+        working-directory: packages/tv_series
+
+      - name: Run tests with coverage
+        run: bash test.sh
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage/test.info
+          flags: unittests
+          name: ditonton-coverage
+          fail_ci_if_error: false

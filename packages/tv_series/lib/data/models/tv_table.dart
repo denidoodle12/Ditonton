@@ -1,5 +1,5 @@
-import 'package:core/domain/entities/tv.dart';
-import 'package:core/domain/entities/tv_detail.dart';
+import 'package:tv_series/domain/entities/tv.dart';
+import 'package:tv_series/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TVTable extends Equatable {

@@ -1,6 +1,6 @@
 import 'package:core/common/exception.dart';
 import 'package:core/data/datasources/db/database_helper.dart';
-import 'package:core/data/models/tv_table.dart';
+import 'package:tv_series/data/models/tv_table.dart';
 
 abstract class TVLocalDataSource {
   Future<String> insertWatchlist(TVTable tv);
@@ -17,7 +17,7 @@ class TVLocalDataSourceImpl implements TVLocalDataSource {
   @override
   Future<String> insertWatchlist(TVTable tv) async {
     try {
-      await databaseHelper.insertTvWatchlist(tv);
+      await databaseHelper.insertTvWatchlist(tv.toJson());
       return 'Added to Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
@@ -27,7 +27,7 @@ class TVLocalDataSourceImpl implements TVLocalDataSource {
   @override
   Future<String> removeWatchlist(TVTable tv) async {
     try {
-      await databaseHelper.removeTvWatchlist(tv);
+      await databaseHelper.removeTvWatchlist(tv.id);
       return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());

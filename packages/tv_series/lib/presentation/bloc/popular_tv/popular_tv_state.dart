@@ -1,4 +1,4 @@
-import 'package:core/domain/entities/tv.dart';
+import 'package:tv_series/domain/entities/tv.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class PopularTVState extends Equatable {

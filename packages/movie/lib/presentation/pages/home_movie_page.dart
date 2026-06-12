@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/common/constants.dart';
 import 'package:core/common/routes.dart';
 import 'package:core/common/state_enum.dart';
-import 'package:core/domain/entities/movie.dart';
+import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/presentation/bloc/movie_list/movie_list_bloc.dart';
 import 'package:movie/presentation/bloc/movie_list/movie_list_event.dart';
 import 'package:movie/presentation/bloc/movie_list/movie_list_state.dart';

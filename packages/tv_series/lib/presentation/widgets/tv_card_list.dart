@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/common/constants.dart';
-import 'package:core/domain/entities/tv.dart';
+import 'package:tv_series/domain/entities/tv.dart';
 import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:core/domain/entities/movie.dart';
+import 'package:movie/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class WatchlistMoviesState extends Equatable {
