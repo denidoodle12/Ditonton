@@ -1,54 +1,97 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/pages/search_tv_page.dart';
-import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/bloc/tv_search/tv_search_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_search/tv_search_event.dart';
+import 'package:tv_series/presentation/bloc/tv_search/tv_search_state.dart';
+import 'package:tv_series/presentation/pages/search_tv_page.dart';
+import 'package:core/domain/entities/tv.dart';
 
-import 'search_tv_page_test.mocks.dart';
+class MockTVSearchBloc extends MockBloc<TVSearchEvent, TVSearchState>
+    implements TVSearchBloc {}
 
-@GenerateMocks([TVSearchNotifier])
 void main() {
-  late MockTVSearchNotifier mockNotifier;
+  late MockTVSearchBloc mockBloc;
 
   setUp(() {
-    mockNotifier = MockTVSearchNotifier();
+    mockBloc = MockTVSearchBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TVSearchNotifier>.value(
-      value: mockNotifier,
-      child: MaterialApp(
-        home: body,
-      ),
+  tearDown(() => mockBloc.close());
+
+  Widget makeTestableWidget(Widget body) {
+    return BlocProvider<TVSearchBloc>.value(
+      value: mockBloc,
+      child: MaterialApp(home: body),
     );
   }
 
-  testWidgets('Page should display center progress bar when loading',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loading);
+  final tTV = TV(
+    backdropPath: '/muth.jpg',
+    genreIds: const [14, 28],
+    id: 1,
+    name: 'Test TV',
+    originalName: 'Test TV',
+    overview: 'overview',
+    popularity: 1.0,
+    posterPath: '/poster.jpg',
+    firstAirDate: '2021-01-01',
+    voteAverage: 7.0,
+    voteCount: 100,
+  );
 
-    final progressBarFinder = find.byType(CircularProgressIndicator);
-    final centerFinder = find.byType(Center);
+  testWidgets('Page should display empty when initial state', (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([TVSearchInitial()]),
+      initialState: TVSearchInitial(),
+    );
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTVPage()));
+    await tester.pumpWidget(makeTestableWidget(SearchTVPage()));
+    await tester.pump();
 
-    expect(centerFinder, findsWidgets);
-    expect(progressBarFinder, findsOneWidget);
+    expect(find.byType(ListView), findsNothing);
+  });
+
+  testWidgets('Page should display CircularProgressIndicator when loading',
+      (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([TVSearchLoading()]),
+      initialState: TVSearchInitial(),
+    );
+
+    await tester.pumpWidget(makeTestableWidget(SearchTVPage()));
+    await tester.pump();
+
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
   testWidgets('Page should display ListView when data is loaded',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.searchResult).thenReturn(<TV>[]);
+      (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([TVSearchLoaded([tTV])]),
+      initialState: TVSearchInitial(),
+    );
 
-    final listViewFinder = find.byType(ListView);
+    await tester.pumpWidget(makeTestableWidget(SearchTVPage()));
+    await tester.pump();
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTVPage()));
+    expect(find.byType(ListView), findsOneWidget);
+  });
 
-    expect(listViewFinder, findsOneWidget);
+  testWidgets('Page should display error text when Error', (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([const TVSearchError('Error message')]),
+      initialState: TVSearchInitial(),
+    );
+
+    await tester.pumpWidget(makeTestableWidget(SearchTVPage()));
+    await tester.pump();
+
+    expect(find.text('Error message'), findsOneWidget);
   });
 }

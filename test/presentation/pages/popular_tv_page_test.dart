@@ -1,66 +1,84 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/pages/popular_tv_page.dart';
-import 'package:ditonton/presentation/provider/popular_tv_notifier.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:core/domain/entities/tv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/bloc/popular_tv/popular_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/popular_tv/popular_tv_event.dart';
+import 'package:tv_series/presentation/bloc/popular_tv/popular_tv_state.dart';
+import 'package:tv_series/presentation/pages/popular_tv_page.dart';
 
-import 'popular_tv_page_test.mocks.dart';
+class MockPopularTVBloc extends MockBloc<PopularTVEvent, PopularTVState>
+    implements PopularTVBloc {}
 
-@GenerateMocks([PopularTVNotifier])
 void main() {
-  late MockPopularTVNotifier mockNotifier;
+  late MockPopularTVBloc mockBloc;
 
   setUp(() {
-    mockNotifier = MockPopularTVNotifier();
+    mockBloc = MockPopularTVBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<PopularTVNotifier>.value(
-      value: mockNotifier,
-      child: MaterialApp(
-        home: body,
-      ),
+  tearDown(() => mockBloc.close());
+
+  Widget makeTestableWidget(Widget body) {
+    return BlocProvider<PopularTVBloc>.value(
+      value: mockBloc,
+      child: MaterialApp(home: body),
     );
   }
 
-  testWidgets('Page should display center progress bar when loading',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loading);
+  final tTV = TV(
+    backdropPath: '/muth.jpg',
+    genreIds: const [14, 28],
+    id: 1,
+    name: 'Test TV',
+    originalName: 'Test TV',
+    overview: 'overview',
+    popularity: 1.0,
+    posterPath: '/poster.jpg',
+    firstAirDate: '2021-01-01',
+    voteAverage: 7.0,
+    voteCount: 100,
+  );
 
-    final progressBarFinder = find.byType(CircularProgressIndicator);
-    final centerFinder = find.byType(Center);
+  testWidgets('Page should display CircularProgressIndicator when loading',
+      (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([PopularTVLoading()]),
+      initialState: PopularTVInitial(),
+    );
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTVPage()));
+    await tester.pumpWidget(makeTestableWidget(PopularTVPage()));
+    await tester.pump();
 
-    expect(centerFinder, findsOneWidget);
-    expect(progressBarFinder, findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
   testWidgets('Page should display ListView when data is loaded',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.tv).thenReturn(<TV>[]);
+      (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([PopularTVLoaded([tTV])]),
+      initialState: PopularTVInitial(),
+    );
 
-    final listViewFinder = find.byType(ListView);
+    await tester.pumpWidget(makeTestableWidget(PopularTVPage()));
+    await tester.pump();
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTVPage()));
-
-    expect(listViewFinder, findsOneWidget);
+    expect(find.byType(ListView), findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Error message');
+  testWidgets('Page should display error text when Error', (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([const PopularTVError('Error message')]),
+      initialState: PopularTVInitial(),
+    );
 
-    final textFinder = find.byKey(Key('error_message'));
+    await tester.pumpWidget(makeTestableWidget(PopularTVPage()));
+    await tester.pump();
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTVPage()));
-
-    expect(textFinder, findsOneWidget);
+    expect(find.byKey(const Key('error_message')), findsOneWidget);
   });
 }

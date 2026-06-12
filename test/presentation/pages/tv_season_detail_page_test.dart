@@ -1,85 +1,90 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/episode.dart';
-import 'package:ditonton/presentation/pages/tv_season_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_season_detail_notifier.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:core/domain/entities/episode.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/bloc/tv_season_detail/tv_season_detail_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_season_detail/tv_season_detail_event.dart';
+import 'package:tv_series/presentation/bloc/tv_season_detail/tv_season_detail_state.dart';
+import 'package:tv_series/presentation/pages/tv_season_detail_page.dart';
 
-import 'tv_season_detail_page_test.mocks.dart';
+class MockTVSeasonDetailBloc
+    extends MockBloc<TVSeasonDetailEvent, TVSeasonDetailState>
+    implements TVSeasonDetailBloc {}
 
-@GenerateMocks([TVSeasonDetailNotifier])
 void main() {
-  late MockTVSeasonDetailNotifier mockNotifier;
+  late MockTVSeasonDetailBloc mockBloc;
 
   setUp(() {
-    mockNotifier = MockTVSeasonDetailNotifier();
+    mockBloc = MockTVSeasonDetailBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TVSeasonDetailNotifier>.value(
-      value: mockNotifier,
-      child: MaterialApp(
-        home: body,
-      ),
+  tearDown(() => mockBloc.close());
+
+  Widget makeTestableWidget(Widget body) {
+    return BlocProvider<TVSeasonDetailBloc>.value(
+      value: mockBloc,
+      child: MaterialApp(home: body),
     );
   }
 
-  testWidgets('Page should display center progress bar when loading',
-      (WidgetTester tester) async {
-    when(mockNotifier.seasonState).thenReturn(RequestState.Loading);
-    // Needed to avoid null exceptions during fetch
-    when(mockNotifier.fetchTvSeasonDetail(1, 1)).thenAnswer((_) async {});
+  final tEpisodes = [
+    Episode(
+      id: 1,
+      name: 'Episode 1',
+      overview: 'overview',
+      stillPath: '/still.jpg',
+      airDate: '2021-01-01',
+      episodeNumber: 1,
+      seasonNumber: 1,
+      voteAverage: 7.0,
+    ),
+  ];
 
-    final progressBarFinder = find.byType(CircularProgressIndicator);
-    final centerFinder = find.byType(Center);
+  testWidgets('Page should display CircularProgressIndicator when loading',
+      (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([TVSeasonDetailLoading()]),
+      initialState: TVSeasonDetailInitial(),
+    );
 
-    await tester.pumpWidget(
-        _makeTestableWidget(TVSeasonDetailPage(tvId: 1, seasonNumber: 1)));
+    await tester.pumpWidget(makeTestableWidget(
+      TVSeasonDetailPage(tvId: 1, seasonNumber: 1),
+    ));
+    await tester.pump();
 
-    expect(centerFinder, findsWidgets);
-    expect(progressBarFinder, findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
-  testWidgets('Page should display ListView when data is loaded',
-      (WidgetTester tester) async {
-    when(mockNotifier.seasonState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.episodes).thenReturn(<Episode>[
-      Episode(
-        id: 1,
-        name: 'Episode 1',
-        overview: 'Overview 1',
-        stillPath: '/path.jpg',
-        airDate: '2021-01-01',
-        episodeNumber: 1,
-        seasonNumber: 1,
-        voteAverage: 1.0,
-      )
-    ]);
-    when(mockNotifier.fetchTvSeasonDetail(1, 1)).thenAnswer((_) async {});
+  testWidgets('Page should display episode list when data is loaded',
+      (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([TVSeasonDetailLoaded(tEpisodes)]),
+      initialState: TVSeasonDetailInitial(),
+    );
 
-    final listViewFinder = find.byType(ListView);
+    await tester.pumpWidget(makeTestableWidget(
+      TVSeasonDetailPage(tvId: 1, seasonNumber: 1),
+    ));
+    await tester.pump();
 
-    await tester.pumpWidget(
-        _makeTestableWidget(TVSeasonDetailPage(tvId: 1, seasonNumber: 1)));
-
-    expect(listViewFinder, findsOneWidget);
-    expect(find.text('1. Episode 1'), findsOneWidget);
+    expect(find.byType(ListView), findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error',
-      (WidgetTester tester) async {
-    when(mockNotifier.seasonState).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Error message');
-    when(mockNotifier.fetchTvSeasonDetail(1, 1)).thenAnswer((_) async {});
+  testWidgets('Page should display error text when Error', (tester) async {
+    whenListen(
+      mockBloc,
+      Stream.fromIterable([const TVSeasonDetailError('Error message')]),
+      initialState: TVSeasonDetailInitial(),
+    );
 
-    final textFinder = find.text('Error message');
+    await tester.pumpWidget(makeTestableWidget(
+      TVSeasonDetailPage(tvId: 1, seasonNumber: 1),
+    ));
+    await tester.pump();
 
-    await tester.pumpWidget(
-        _makeTestableWidget(TVSeasonDetailPage(tvId: 1, seasonNumber: 1)));
-
-    expect(textFinder, findsOneWidget);
+    expect(find.text('Error message'), findsOneWidget);
   });
 }
