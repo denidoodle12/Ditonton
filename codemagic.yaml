@@ -5,6 +5,15 @@ workflows:
     environment:
       flutter: stable
 
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+
     scripts:
       - name: Get Flutter packages (root)
         script: flutter pub get

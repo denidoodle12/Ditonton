@@ -1,6 +1,6 @@
 # Ditonton 🎬
 
-[![Codemagic build status](https://api.codemagic.io/apps/6a2a3d5b270053c6778f5044/6a2a3d5b270053c6778f5043/status_badge.svg)](https://codemagic.io/app/6a2a3d5b270053c6778f5044/6a2a3d5b270053c6778f5043/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/6a2a3d5b270053c6778f5044/android-workflow/status_badge.svg)](https://codemagic.io/app/6a2a3d5b270053c6778f5044/android-workflow/latest_build)
 
 A Flutter-based movie and TV series catalog app powered by the [The Movie Database (TMDB) API](https://www.themoviedb.org/). Built as the final submission for the **Flutter Expert Class — Dicoding Indonesia**.
 
